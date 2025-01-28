@@ -406,6 +406,18 @@ button
                 height: 32pt
                 margin: 0pt 10pt
 
+.extra-big
+    display: block
+    @include respond(tablet)
+        display: none
+
+.extra-small
+    
+    display: none
+    @include respond(tablet)
+        display: block
+        padding: 5%
+
 .certificate-thank
     position: relative
     margin-bottom: 20pt
@@ -565,6 +577,7 @@ button
         border-radius: $radius
         text-align: center
         h2
+            text-shadow: none
             color: black
             font-family: "Rubik Doodle Shadow", system-ui
             font-weight: 900
@@ -2676,6 +2689,10 @@ body
 .tab-container
     margin: 1rem
     padding: 1rem 10%
+    @include respond(bigdesctop)
+        padding: 1rem 7%
+    @include respond(desctop)
+        padding: 1rem 3%
 
 .tab
     display: flex

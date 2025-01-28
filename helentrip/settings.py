@@ -38,10 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'trip.apps.TripConfig',
     'ckeditor',
     'django.contrib.humanize',
 ]
+
+SITE_ID = 1
 
 CKEDITOR_CONFIGS = {
     'default': {

@@ -2,6 +2,7 @@ import os
 import random
 from django.shortcuts import get_object_or_404, render, redirect # type: ignore
 from django.http import FileResponse, Http404 # type: ignore
+from django.urls import reverse # type: ignore
 from .forms import TourForm, DayForm, InclusiveForm, NotInclusiveForm, Titlte1Form, TitlteForm,\
     DateStartForm, DateEndForm, DescriptionForm, PriceAdultForm, PriceChildForm, PricePensionerForm,\
     Background1Form, Background2Form, Background3Form, IconForm, \
@@ -15,10 +16,17 @@ from django.contrib.auth import login, logout # type: ignore
 from datetime import date
 from dateutil.relativedelta import relativedelta # type: ignore
 from django.core.mail import send_mail # type: ignore
+from django.contrib.sites.models import Site # type: ignore
 from django.core.files.storage import default_storage # type: ignore
 
 
 today = date.today()
+
+# current_site = Site.objects.get_current()
+# domain = current_site.domain
+# main_page = f"http://{domain}/"  # Генерация URL главной страницы
+# dash_certificates_url = f"http://{domain}{reverse('dash_certificate')}"
+# dashboard_url = f"http://{domain}{reverse('dashboard')}"
 
 ## Форма входа
 
@@ -54,6 +62,13 @@ def index(request):
             certificate = Certificate.objects.create(**form.cleaned_data)
             certificate.valid_until = certificate.created_at + relativedelta(months=3)
             certificate.save()
+            
+            content = f"Для клієнта: {form.cleaned_data['name']} \n \
+                        Телефон: {form.cleaned_data['phoneFor']} \n \
+                        замовлено сертифікат на суму: {form.cleaned_data['amount']} \n \
+                        телефон замовника: {form.cleaned_data['phone']}"
+            send_mail('Новий клієнт', content, 'heleena_trip@ukr.net', ['alexoseu@ukr.net'], fail_silently=False)
+            
             return redirect('thank_you_certificate', certificate.pk)
     else:
         form = CertificateForm()
@@ -74,6 +89,13 @@ def administrator(request):
             certificate = Certificate.objects.create(**form.cleaned_data)
             certificate.valid_until = certificate.created_at + relativedelta(months=3)
             certificate.save()
+            
+            content = f"Для клієнта: {form.cleaned_data['name']} \n \
+                        Телефон: {form.cleaned_data['phoneFor']} \n \
+                        замовлено сертифікат на суму: {form.cleaned_data['amount']} \n \
+                        телефон замовника: {form.cleaned_data['phone']}"
+            send_mail('Новий сертифікат', content, 'heleena_trip@ukr.net', ['alexoseu@ukr.net'], fail_silently=False)
+            
             return redirect('thank_you_certificate', certificate.pk)
     else:
         form = CertificateForm()
@@ -253,17 +275,24 @@ def tour(request, tour_id):
     
 def edit_tour(request, tour_id):
     clients = Client.objects.all()
-    #emails = [i.email for i in clients]
     tour = get_object_or_404(Tour, id=tour_id)
     pagetitle = tour.title1
     images = ImageForDescription.objects.filter(tour=tour)
     days = Day.objects.filter(tour=tour)
     cards = Inclusive.objects.filter(tour=tour)
+    reviews = Review.objects.filter(tour=tour)[0:4]
     not_cards = NotInclusive.objects.filter(tour=tour)
     faqs = FaqTour.objects.filter(tour=tour)
     ifDateAdult = tour.dateBeforeAdult > today if tour.dateBeforeAdult else False
     ifDateChild = tour.dateBeforeChild > today if tour.dateBeforeChild else False
-    reviews = Review.objects.filter(tour=tour)[0:4]
+    if tour.priceAdult:
+        priceAdult = int(tour.priceAdultBefore if ifDateAdult else tour.priceAdult)
+    else:
+        priceAdult = 0
+    if tour.priceChild:
+        priceChild = int(tour.priceChildBefore if ifDateChild else tour.priceChild)
+    else:
+        priceChild = 0
     upcoming_tours = [i for i in Tour.objects.all() if (i.isActive == True and i.pk != tour.pk and i.dateStart != None and i.dateStart > today)][0:3]
     if request.method == 'POST':
         form1 = ReviewForm(request.POST)
@@ -274,14 +303,16 @@ def edit_tour(request, tour_id):
             review.save()
             return redirect('tour', tour.pk)
         if form2.is_valid():
-            #if form2.cleaned_data['email'] not in emails:
             client = Client.objects.create(**form2.cleaned_data)
-            # content = f"Клієнт: {form2.cleaned_data['name']} \n \
-            #             Телефон: {form2.cleaned_data['phone']} \n \
-            #             email: {form2.cleaned_data['email']} \n \
-            #             Забронював тур: {tour.title1}"
-            # send_mail('Новий клієнт', content, 'odesatours@ukr.net', ['ch.chaplynska@gmail.com'], fail_silently=False)
-            return redirect('thank_you', tour.pk)
+            client.tour = tour
+            client.date = tour.dateStart
+            client.value = ((client.amount - client.children) * priceAdult + client.children * priceChild) if priceChild > 0 else (client.amount * priceAdult)
+            client.save()
+            content = f"Клієнт: {form2.cleaned_data['name']} \n \
+                        Телефон: {form2.cleaned_data['phone']} \n \
+                        Забронював тур: {tour.title1}"
+            send_mail('Новий клієнт', content, 'heleena_trip@ukr.net', ['alexoseu@ukr.net'], fail_silently=False)
+            return redirect('thank_you_tour', tour.pk)
     else:
         form1 = ReviewForm()
         form2 = ClientForm()

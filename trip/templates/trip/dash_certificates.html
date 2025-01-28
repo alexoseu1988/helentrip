@@ -54,7 +54,7 @@
                         <input type="hidden" name="certificate_id" value="{{ certificate.id }}">
                         <div class="string__name" {% if certificate.approved %} style="background-color: #8DF073" {% else %} style="background-color: #fd6281" {% endif %}><a href="{% url 'certificate' certificate.pk %}">{{ certificate.name }}</a></div>
                         <div class="string__phone">{{ certificate.phone }}</div>
-                        <div class="string__phone">{{ certificate.code }}</div>
+                        <div class="string__phone">{{ certificate.code }} {% if certificate.completed %}<br>погашено{% endif %}</div>
                     </div>
                     <div class="string__blocksubbig2">
                         <input class="string__prepayment" type="number" id="amount_{{ certificate.id }}" name="amount" value="{{ certificate.amount }}" min="0" step="1">
