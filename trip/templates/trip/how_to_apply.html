@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+    <header class="header background">
+        <a href="{% url 'home' %}"><img src={% static "img/logo2.svg" %} alt="Логотип" class="header__logo"></a>
+        <div class="header__menu" onclick="openNav()">&equiv;</div>
+        <div class="header__box">
+            <h1 class="title-first">
+                <span class="title-first__main text-color-white">ЯК ОФОРМИТИ ТУР</span>
+            </h1>
+        </div>
+    </header>
+    <br><br>
+    <section class="section-apply">
+        <div class="section-apply__wrapper">
+            <div class="section-apply__apply">
+                <div class="number">
+                    1
+                </div>
+                <div>
+                    <p><span>Заповнити нашу анкету на сайті для замовлення туру</span></p>
+                    <p>
+                        <ul>
+                            <li>ім’я та прізвище;</li>
+                            <li>номер телефону;</li>
+                            <li>електронна адреса.</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            <div class="section-apply__apply">
+                <div class="number">
+                    2
+                </div>
+                <div>
+                    <p><span>Для уточнення деталей туру, з вами зв’яжиться наш менеджер</span></p>
+                    <p>
+                        <ul>
+                            <li>відповість на усі Ваші запитання;</li>
+                            <li>розповість про умови оплати туру.</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            <div class="section-apply__apply">
+                <div class="number">
+                    3
+                </div>
+                <div>
+                    <p><span>Оплата</span></p>
+                    <p>
+                        <ul>
+                            <li>здійснюємо оплату на реквізити за тур;</li>
+                            <li>якщо тур відміняється через нашу  провину – усі Ваші кошти повертаються.</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            <div class="section-apply__apply">
+                <div class="number">
+                    4
+                </div>
+                <div>
+                    <p><span>Документи до туру</span></p>
+                    <p>
+                        <ul>
+                            <li>за 2-3 дні до виїзду надсилаємо запрошення до групи у Viber;</li>
+                            <li>нагадаємо про необхідні документи до туру;</li>
+                            <li>місце для зустрічі вкажемо також у групі у Viber.</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            <div class="section-apply__apply">
+                <div class="number">
+                    5
+                </div>
+                <div>
+                    <p><span>Ділимося враженнями після відпочинку</span></p>
+                    <p>
+                        <ul>
+                            <li>надсилаємо відгук з туру на наш сайт;</li>
+                            <li>за найкращі звіти з турів ви заробляєте собі «+» до вашої карми.</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

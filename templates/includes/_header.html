@@ -1,0 +1,13 @@
+{% load static %}
+<header class="header">
+    <div class="header__left">
+        <div><img class="icon-menu" src={% static "icons/menu-pink.svg" %} alt="МЕНЮ"></div>
+        <div><a href="{% url "home" %}"><img src={% static "icons/Logo_Transparent.svg" %} alt="HELEENA_TRIP"></a></div>
+        <div></div>
+    </div>
+    <div class="header__right">
+        <div class="contacts-icon">
+            <span>КОНТАКТИ </span> 
+            <img src={% static "icons/contacts.svg" %} alt="КОНТАКТИ"></div>
+    </div>
+</header>

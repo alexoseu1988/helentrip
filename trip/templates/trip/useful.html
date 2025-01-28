@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+    <div class="banner">
+        <h1>КОРИСНЕ</h1>
+    </div>
+
+    <br><br>
+
+        <section class="section">
+            
+            <div class="small-card">
+                <a href="{% url "documents" %}">
+                <div class="small-card__inner-div">
+                    <img class="small-card__ico" src="{% static "icons/passport.svg" %}" alt="Документи">
+                    <div class="small-card__description">
+                        <h3>ДОКУМЕНТИ</h3>
+                        <hr>
+                        <p>Авторські програми групових турів по Україні та за кордон</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+
+            <div class="small-card">
+                <a href="{% url "lifehacks" %}">
+                <div class="small-card__inner-div">
+                    <img class="small-card__ico" src="{% static "icons/idea.svg" %}" alt="Лайфхаки">
+                    <div class="small-card__description">
+                        <h3>ЛАЙФХАКИ</h3>
+                        <hr>
+                        <p>Авторські програми групових турів по Україні та за кордон</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+{% endblock %}

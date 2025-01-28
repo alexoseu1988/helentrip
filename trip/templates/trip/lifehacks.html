@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+<div class="banner">
+    <h1>КОРИСНІ ТУРИСТИЧНІ ЛАЙФХАКИ</h1>
+</div>
+
+<main>
+    <section class="section">
+        {% for lifehack in lifehacks %}
+        
+        <div class="lifehack">
+            <a href="{% url 'lifehack' lifehack.pk %}">
+                <img class="lifehack__logo1" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+                <img class="lifehack__logo2" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+                <img class="lifehack__logo3" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+                <img class="lifehack__logo4" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+                {% comment %} <img class="lifehack__logo5" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO"> {% endcomment %}
+                <img class="lifehack__logo6" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+                <img class="lifehack__logo7" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+                <img class="lifehack__logo8" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+                <img class="lifehack__logo9" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+                {% comment %} <img class="lifehack__logo10" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO"> {% endcomment %}
+                <img class="lifehack__logo11" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+                <img class="lifehack__logo12" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+                <img class="lifehack__logo13" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+                <img class="lifehack__logo14" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+                {% comment %} <img class="lifehack__logo15" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO"> {% endcomment %}
+               
+
+                <div class="lifehack__inner-div-lifehack">
+                        <h3>{{ lifehack.name }}</h3>
+                </div>
+            </a>
+        </div>
+        
+        {% endfor %}
+    </section>
+    
+    {% if user.username == "helentrip" %}
+        <div class="section-buttons">
+            <a href={% url "new_lifehack" %} class="button1">НОВИЙ ЛАЙФХАК</a>
+        </div>
+    {% endif %}
+
+{% endblock %}

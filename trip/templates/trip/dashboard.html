@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+<br>
+<h1 class="center">ПАНЕЛЬ УПРАВЛІННЯ</h1>
+<br>
+
+{% if user.username == "helentrip" %}
+
+<main>
+    <div class="section-buttons">
+        <a href={% url "dashboard" %} class="button1">Діючі клієнти</a>
+        <a href={% url "dashboard_deleted" %} class="button1">Видалені клієнти</a>
+    </div>
+    <section>
+        <div class="string">
+            <div class="string__blockbig">
+                <div class="string__blocksubbig1">
+                    <div class="string__name">Ім'я Прізвище</div>
+                    
+                        <select class="string__tour" name="select" id="tourSelect" onchange="location.href=this.value;">
+                            <option value="" disabled selected>- ТУР -</option>
+                            {% for tour in tours %}
+                                <option value="{% url 'dashboard_by_tour' tour.pk %}">{{ tour.title }}</option>
+                            {% endfor %}
+                            <option value="{% url 'dashboard' %}">ВСІ ТУРИ</option>
+                        </select>
+                    
+                    <div class="string__status">ДАТА</div>
+                </div>
+                <div class="string__blocksubbig2">
+                    <div class="string__phone">Телефон</div>
+                    <div class="string__people">Осіб</div>
+                    <div class="string__children">Дітей</div>
+                </div>
+            </div>
+            <div class="string__blockbig">
+                <div class="string__blocksubbig2">
+                    <div class="string__prepayment">Вартість</div>
+                    <div class="string__people">%</div>
+                    <div class="string__prepayment">Передплата</div>
+                </div>
+                <div class="string__blocksubbig1">
+                    <div class="string__comment">Коментар</div>
+                </div>
+            </div>
+            <div class="string__blocksmall"></div>
+        </div>
+
+        {% for client in clients %}
+        <form method="post" action="{% url 'dashboard' %}">
+            {% csrf_token %}
+            <div class="string">
+                <div class="string__blockbig">
+                    <div class="string__blocksubbig1">
+                        <input type="hidden" name="client_id" value="{{ client.id }}">
+                        <div class="string__name" {% if client.approved %} style="background-color: #8DF073" {% else %} style="background-color: #fd6281" {% endif %}>{{ client.name }}</div>
+                        <div class="string__tour">{{ client.tour.title }}</div>
+                        <div class="string__status">{{ client.date|date:"d.m.Y" }}</div>
+                    </div>
+                    <div class="string__blocksubbig2">
+                        <div class="string__phone">{{ client.phone }}<br>{{ client.communication }}</div>
+                        <div class="string__people">{{ client.amount }}</div>
+                        <div class="string__children">{{ client.children }}</div>
+                    </div>
+                </div>
+                <div class="string__blockbig">
+                    <div class="string__blocksubbig2">
+                        <div class="string__prepayment">{{ client.value }}</div>
+                        <div class="string__people">{{ client.payment }}</div>
+                        <input class="string__prepayment" type="number" id="prepayment_{{ client.id }}" name="prepayment" value="{{ client.prepayment }}" min="0" step="1">
+                    </div>
+                    <div class="string__blocksubbig1">
+                        <textarea class="string__comment" id="notes_{{ client.id }}" name="notes" rows="3">{{ client.notes }}</textarea>
+                    </div>
+                </div>
+                <div class="string__blocksmall">
+                    <button class="string__update" type="submit"><img src={% static "icons/update.svg" %} alt="Обновить" class="edit__ico"></button>
+                    <div class="string__book"><a href="#"><img src={% static "icons/telegram.svg" %} alt="Телеграм" class="edit__ico"></a></div>
+                    <div class="string__book"><a href="#"><img src={% static "icons/whatsapp.svg" %} alt="Ватсап" class="edit__ico"></a></div>
+                    <div class="string__book"><a href="#"><img src={% static "icons/viber.svg" %} alt="Вайбер" class="edit__ico"></a></div>
+                    {% if not client.deleted %}<div class="string__book">
+                        <a href="{% url 'approve_client' client.pk %}">
+                            {% if client.approved %}
+                            <img src={% static "icons/minus-deactivate.svg" %} alt="Деактивировать" class="edit__ico">
+                            {% else %}
+                            <img src={% static "icons/plus-activate.svg" %} alt="Одобрить" class="edit__ico">
+                            {% endif %}
+                        </a>
+                    </div>{% endif %}
+                    <div class="string__book"><a href="{% url 'delete_client' client.pk %}"><img src={% static "icons/delete.svg" %} alt="Удалить" class="edit__ico"></a></div>
+                </div>
+            </div>
+        </form>
+        {% endfor %}
+
+    </section>
+</main>
+{% else %}
+<a href={% url "user_login" %} class="btn background-white">АВТОРИЗУЙТЕСЬ</a>
+{% endif %}
+{% endblock %}

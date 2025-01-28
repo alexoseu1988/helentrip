@@ -1,0 +1,13 @@
+{% load static %}
+<footer>
+    <div class="footer__left"><a href="{% url "home" %}"><img src={% static "icons/Logo_Transparent.svg" %} alt="HELEENA_TRIP"></a></div>
+    <div>(097)-455-86-91</div>
+    <div>heleena_trip@ukr.net</div>
+    <div><a href="{% url 'all_tours' %}">Розклад турів</a></div>
+    <div><a href="{% url 'galery' %}">Фотогалерея</a></div>
+    <div><a href="{% url 'all_reviews' %}">Відгуки</a></div>
+    <div class="footer__right">
+        <div><a href="{{ contacts.telegramChannel }}"><img src={% static "icons/telegram.svg" alt="Інстаграм" %}></a></div>
+        <div><a href="{{ contacts.insta }}"><img src={% static "icons/instagram-2.svg" alt="Телеграм" %}></a></div>
+    </div>
+</footer>

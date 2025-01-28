@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+
+<br>
+<a href="{% url 'dash_certificates' %}"><h1 class="center">СЕРТИФІКАТИ</h1></a>
+<br>
+
+{% if user.username == "helentrip" %}
+
+
+<form class="find-certificate" method="POST">
+    {% csrf_token %}
+    {{ form1.as_p }}
+    <button type="submit">Шукати</button>
+</form>
+<main>
+
+        {% comment %} <form class="find-certificate">
+            <label for="certificate">Номер сертифікату:</label>
+            <input type="search" placeholder="00000000" id="certificate" name="certificate" required>
+            <button type="submit">ЗНАЙТИ</button>
+        </form> {% endcomment %}
+
+    
+    <div class="section-buttons">
+        <a href={% url "dash_certificates" %} class="button1">Незавершені сертифікати</a>
+        <a href={% url "dash_certificates_completed" %} class="button1">Завершені сертифікати</a>
+    </div>
+    <section>
+        <div class="string">
+            <div class="string__blockbig">
+                <div class="string__blocksubbig1">
+                    <div class="string__name">Ім'я Прізвище</div>
+                    <div class="string__phone">Телефон</div>
+                    <div class="string__phone">Код</div>
+                </div>
+                <div class="string__blocksubbig2">
+                    <div class="string__prepayment-certif">Передплата</div>
+                    <input class="string__prepayment-certif" type="date">
+                </div>
+            </div>
+            <div class="string__blocksmall"></div>
+        </div>
+
+        {% for certificate in certificates %}
+
+        <form method="post" action="{% url 'dash_certificates' %}">
+            {% csrf_token %}
+            <div class="string">
+                <div class="string__blockbig">
+                    <div class="string__blocksubbig1">
+                        <input type="hidden" name="certificate_id" value="{{ certificate.id }}">
+                        <div class="string__name" {% if certificate.approved %} style="background-color: #8DF073" {% else %} style="background-color: #fd6281" {% endif %}><a href="{% url 'certificate' certificate.pk %}">{{ certificate.name }}</a></div>
+                        <div class="string__phone">{{ certificate.phone }}</div>
+                        <div class="string__phone">{{ certificate.code }}</div>
+                    </div>
+                    <div class="string__blocksubbig2">
+                        <input class="string__prepayment" type="number" id="amount_{{ certificate.id }}" name="amount" value="{{ certificate.amount }}" min="0" step="1">
+                        <input class="string__prepayment" type="date" name="valid_until" value="{{ certificate.valid_until|date:'Y-m-d' }}">
+                    </div>
+                </div>
+                <div class="string__blocksmall">
+                    <button class="string__update" type="submit"><img src={% static "icons/update.svg" %} alt="Обновить" class="edit__ico"></button>
+                    <div class="string__book"><a href="#"><img src={% static "icons/telegram.svg" %} alt="Телеграм" class="edit__ico"></a></div>
+                    <div class="string__book"><a href="#"><img src={% static "icons/whatsapp.svg" %} alt="Ватсап" class="edit__ico"></a></div>
+                    <div class="string__book"><a href="#"><img src={% static "icons/viber.svg" %} alt="Вайбер" class="edit__ico"></a></div>
+                    {% if not certificate.completed %}<div class="string__book">
+                        <a href="{% url 'approve_certificate' certificate.pk %}">
+                            {% if certificate.approved %}
+                            <img src={% static "icons/minus-deactivate.svg" %} alt="Деактивировать" class="edit__ico">
+                            {% else %}
+                            <img src={% static "icons/plus-activate.svg" %} alt="Одобрить" class="edit__ico">
+                            {% endif %}
+                        </a>
+                    </div>{% endif %}
+                    <div class="string__book"><a href="{% url 'complete_certificate' certificate.pk %}"><img src={% static "icons/delete.svg" %} alt="Удалить" class="edit__ico"></a></div>
+                </div>
+            </div>
+        </form>
+        {% endfor %}
+
+    </section>
+</main>
+{% else %}
+<a href={% url "user_login" %} class="btn background-white">АВТОРИЗУЙТЕСЬ</a>
+{% endif %}
+{% endblock %}

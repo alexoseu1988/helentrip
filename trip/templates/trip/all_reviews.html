@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+{% comment %} {% if user.username == "helentrip" %} {% endcomment %}
+    <div>
+        <div class="slideshow">
+            <div class="slideshow-item">
+                <img src={% static "img/banner.jpg" %} alt="">
+                <div class="slideshow-item-text">
+                    <h1>ВІДГУКИ НАШИХ КЛІЄНТІВ</h1>
+                </div>
+            </div>
+            <div class="slideshow-item">
+                <img src={% static "img/banner2.jpg" %} alt="">
+                <div class="slideshow-item-text">
+                    <h1>ВІДГУКИ НАШИХ КЛІЄНТІВ</h1>
+                </div>
+            </div>
+            <div class="slideshow-item">
+                <img src={% static "img/banner3.jpg" %} alt="">
+                <div class="slideshow-item-text">
+                    <h1>ВІДГУКИ НАШИХ КЛІЄНТІВ</h1>
+                </div>
+            </div>
+            <div class="slideshow-item">
+                <img src={% static "img/banner4.jpg" %} alt="">
+                <div class="slideshow-item-text">
+                    <h1>ВІДГУКИ НАШИХ КЛІЄНТІВ</h1>          
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+        <section class="section">
+            
+            {% for review in reviews %}
+
+                <div class="review">
+                    <div class="review__left">
+                        <img src={% static "icons/star2.svg" %} alt="Відгук">
+                    </div>
+                    <div class="review__right">
+                        <h3>{{review.name}} </h3>
+                        <div><a href="{% url 'tour' review.tour.pk %}">{{review.tour.title}}</a></div>
+                        <p>{{review.review|safe}}</p>
+                    </div>
+
+                    {% if user.username == "helentrip" %}
+                    <div class="edit__wrapper">
+                        <a href="{% url 'delete_review' review.pk %}"> <img src={% static "icons/delete.svg" %} alt="Удалить" class="edit__ico"> </a>
+                    </div>
+                    {% endif %}
+                    
+                </div>
+
+            {% endfor %}
+        </section>
+    </div>
+
+{% comment %} {% else %}
+<a href={% url "user_login" %} class="btn background-white">АВТОРИЗУЙТЕСЬ</a>
+{% endif %} {% endcomment %}
+{% endblock %}

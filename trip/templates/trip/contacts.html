@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+<div class="banner">
+    <h1>КОНТАКТИ</h1>
+</div>
+
+<div class="contacts1">
+    <ul>
+        <li>
+            <a href="{% url "home" %}">
+                <div>
+                    <img  src={% static "icons/phone.svg" %} alt="LOGO">
+                    Телефон
+                </div>
+            </a>
+            <a href="{% url "home" %}">
+                <div>
+                    <img  src={% static "icons/viber.svg" %} alt="LOGO">
+                    Viber
+                </div>
+            </a>
+            <a href="{% url "home" %}">
+                <div>
+                    <img  src={% static "icons/telegram.svg" %} alt="LOGO">
+                    Telegram
+                </div>
+            </a>
+            <a href="{% url "home" %}">
+                <div>
+                    <img  src={% static "icons/whatsapp.svg" %} alt="LOGO">
+                    WhatsApp
+                </div>
+            </a>
+            
+            <a href="{% url "home" %}">
+                <div>
+                    <img  src={% static "icons/instagram.svg" %} alt="LOGO">
+                    Instagram
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
+
+{% endblock %}

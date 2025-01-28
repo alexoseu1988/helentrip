@@ -1,0 +1,66 @@
+{% load static %}
+<div class="contacts">
+    <img class="cross2" src={% static "icons/cross_white.svg" %} alt="ЗАКРИТИ">
+    <img class="contacts__logo1" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo2" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo3" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo4" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo5" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo6" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo7" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo8" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo9" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo10" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo11" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo12" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo13" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo14" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo15" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <!-- <img class="contacts__logo16" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO"> -->
+    <img class="contacts__logo17" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo18" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo19" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="contacts__logo20" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+
+    <ul>
+        <li>
+            <a href="{% url "home" %}">
+                <div>
+                    <img  src={% static "icons/phone.svg" %} alt="LOGO">
+                    Телефон
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="{% url "home" %}">
+                <div>
+                    <img  src={% static "icons/viber.svg" %} alt="LOGO">
+                    Viber
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="{% url "home" %}">
+                <div>
+                    <img  src={% static "icons/telegram.svg" %} alt="LOGO">
+                    Telegram
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="{% url "home" %}">
+                <div>
+                    <img  src={% static "icons/whatsapp.svg" %} alt="LOGO">
+                    WhatsApp
+                </div>
+            </a>
+        <li>
+            <a href="{{ contacts.insta }}">
+                <div>
+                    <img  src={% static "icons/instagram.svg" %} alt="LOGO">
+                    Instagram
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+    <div class="banner">
+        <h1>НЕОБХІДНІ ДОКУМЕНТИ</h1>
+    </div>
+
+    <br><br>
+
+    <main>
+        <section class="section">
+            <div class="rotate">
+                <div class="rotate__card rotate__card_front">
+                    <img class="rotate__img" src={% static "img/woman.jpg" %} alt="Для жінок">
+                    <div class="rotate__text">
+                        <h3>ДЛЯ ЖІНОК</h3>
+                        <!-- <div class="rotate__tap-me"></div> -->
+                        <img class="rotate__ico" src={% static "icons/finger.svg" %} alt="Rotate">
+                    </div>
+                </div>
+
+                <div class="rotate__card rotate__card_back">
+                    <ul>
+                        <li>Паспорт громадянина України;</li>
+                        <li>Закордонний паспорт;</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="rotate">
+                <div class="rotate__card rotate__card_front">
+                    <img class="rotate__img" src={% static "img/man.jpg" %} alt="Для чоловіків">
+                    <div class="rotate__text">
+                        <h3>ДЛЯ ЧОЛОВІКІВ</h3>
+                        <img class="rotate__ico" src={% static "icons/finger.svg" %} alt="Rotate">
+                    </div>
+                </div>
+
+                <div class="rotate__card rotate__card_back">
+                    <ul>
+                        <li>Паспорт громадянина України;</li>
+                        <li>Закордонний паспорт;</li>
+                        <li>На період воєнного стану потрібен документ, що надає право на виїзд (довідка про встановлення інвалідності, документи з територіальних центрів комплектування та соціальної підтримки, посвідчення батька багатодітної сім'ї тощо);</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="rotate">
+                <div class="rotate__card rotate__card_front">
+                    <img class="rotate__img" src={% static "img/children.jpg" %} alt="Для дітей">
+                    <div class="rotate__text">
+                        <h3>ДЛЯ ПЕРЕТИНУ КОРДОНУ З ДІТЬМИ</h3>
+                        <img class="rotate__ico" src={% static "icons/finger.svg" %} alt="Rotate">
+                    </div>
+                </div>
+
+                <div class="rotate__card rotate__card_back">
+                    <ul>
+                        <li>Свідоцтво про народження дитини до 14 років / паспорт громадянина України з 14 років;</li>
+                        <li>Додаткові документи, що підтверджують родинні зв'язки з дитиною. Якщо у матері та дитини різні прізвища, в такому разі додатково може знадобитися: свідоцтво про шлюб або рішення суду про розірвання шлюбу тощо;</li>
+                        <li>Закордонний паспорт матері (батька);</li>
+                        <li>Закордонний паспорт дитини (не потрібен при внесенні інформації про дитину до закордонного паспорта матері);</li>
+                        <li>Письмовий дозвіл другого з батьків на виїзд дитини;</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="rotate">
+                <div class="rotate__card rotate__card_front">
+                    <img class="rotate__img" src={% static "img/pets.jpg" %} alt="Для тварин">
+                    <div class="rotate__text">
+                        <h3>ДЛЯ ПЕРЕТИНУ КОРДОНУ З ТВАРИНАМИ</h3>
+                        <img class="rotate__ico" src={% static "icons/finger.svg" %} alt="Rotate">
+                    </div>
+                </div>
+
+                <div class="rotate__card rotate__card_back">
+                    <ul>
+                        <li>Тварина має бути щеплена проти сказу не раніше ніж за 30 днів до виїзду;</li>
+                        <li>Довідка про стан здоров'я, видана за п'ять днів до виїзду;</li>
+                        <li>Ідентифікація клеймом або мікрочіпом (стандарти ISO 11784, ISO 11785);</li>
+                        <li>Тест на антитіла;</li>
+                        <li>Міжнародний ветеринарний сертифікат на тварину;</li>
+                        <li>Довідку про те, що улюбленець не є племінною цінністю;</li>
+                        <li>Паспорт європейського зразка, який має містити:
+                            <br>1. відмітку про комплексну вакцинацію проти вірусних хвороб (остання вакцинація має бути не пізніше 30 днів і не раніше 1 року до від'їзду);
+                            <br>2. фото тварини до досягнення нею одного року;
+                            <br>3. позначку про чипування із зазначенням дати чіпування та локалізації мікрочіпа;
+                            <br>4. інформацію про вакцинацію проти сказу (назва вакцини, підпис, друк, дата);
+                            <br>5. інформацію про обробки проти екто- та ендопаразитів (проти бліх та глистів)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="rotate">
+                <div class="rotate__card rotate__card_front">
+                    <img class="rotate__img" src={% static "img/tourists.jpg" %} alt="Додатково">
+                    <div class="rotate__text">
+                        <h3>ДОДАТКОВО</h3>
+                        <img class="rotate__ico" src={% static "icons/finger.svg" %} alt="Rotate">
+                    </div>
+                </div>
+
+                <div class="rotate__card rotate__card_back">
+                    <ul>
+                        <li><b>Чоловіки з інвалідністю</b> - посвідчення, що підтверджує відповідний статус, або пенсійне посвідчення, або посвідчення, що підтверджує призначення соціальної допомоги;</li>
+                        <li><b>Заброньовані на період мобілізації та воєнний час</b> — посвідчення про відстрочку від призову (бронь) та документи на відрядження;</li>
+                        <li><b>Багатодітний батько чи мати</b> – свідоцтво про народження всіх дітей, посвідчення батьків багатодітної сім'ї;</li>
+                        <li><b>Чоловік або жінка, які самостійно виховують малолітніх дітей</b> - свідоцтво про смерть чоловіка (дружини) та свідоцтво про народження всіх дітей;</li>
+                        <li><b>Опікуни, прийомні батьки тощо, на утриманні яких перебувають діти</b> - сироти або діти, позбавлені батьківського піклування, віком до 18 років — документ, що підтверджує усиновлення, опікунство, піклування, а також письмове узгодження служби у справах дітей за місцем звернення або обласної військової адміністрації;</li>
+                        <li><b>Особи, які мають дружину (чоловіка) з числа осіб з інвалідністю</b> - документ, що підтверджує інвалідність та родинні зв'язки;</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- <script>
+        const rotateElement = document.querySelector('.rotate');
+
+        rotateElement.addEventListener('click', function() {
+            rotateElement.classList.toggle('rotated');
+        });
+    </script> -->
+
+    <script>
+        const rotateElement = document.querySelectorAll('.rotate');
+
+        for (let i of rotateElement) {
+            i.addEventListener('click', function() {
+                i.classList.toggle('rotated');
+        });
+        }
+    </script>
+{% endblock %}

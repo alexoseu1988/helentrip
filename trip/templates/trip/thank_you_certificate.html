@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block main %}
+
+<h1 class="center">
+    ДЯКУЄМО ЗА ПРИДБАННЯ СЕРТИФІКАТУ!
+    <br>
+    МЕНЕДЖЕР ЗАТЕЛЕФОНУЄ ВАМ НАЙБЛИЖЧИМ ЧАСОМ
+</h1>
+<br><br>
+
+<div class="certificate-thank">
+    <img class="main-menu__logo1" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo2" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo3" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo4" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo5" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo6" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo7" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo8" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo9" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo10" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo11" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo12" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo13" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo14" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo15" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo16" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo17" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo18" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo19" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+    <img class="main-menu__logo20" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+
+    <div class="certificate-thank__container">
+        <h2>
+            ПОДАРУНКОВИЙ СЕРТИФІКАТ
+        </h2>
+        <div class="certificate-thank__label">на ім'я:</div>
+        <div class="certificate-thank__name">{{ certificate.name }}</div>
+
+        <div class="certificate-thank__label">на суму:</div>
+        <div class="certificate-thank__content">{{ certificate.amount | intcomma }} грн</div>
+
+        <div class="certificate-thank__label">дійсний до:</div>
+        <div class="certificate-thank__content">{{ certificate.valid_until|date:"d.m.Y" }}</div>
+
+        <div class="certificate-thank__waiting">{% if certificate.code %} № {{ certificate.code }} {% else %} Код буде сгенеровано, коли менеджер схвале заявку {% endif %}</div>
+    </div>
+
+</div>
+    
+{% endblock %}

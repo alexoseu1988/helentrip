@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+{% if user.username == "helentrip" %}
+    <div>
+        <div>
+            <h2>
+                ВСІ ПИТАННЯ
+                <a href="{% url "new_faq" %}">
+                    <img src={% static "icons/plus.svg" %} alt="Додати" class="edit__ico">
+                </a> 
+            </h2>
+        </div>
+            
+        {% for faq in faqs %}
+            <div class="part">{{faq.title}}
+                <a href="{% url "new_one_faq" faq.pk %}">
+                    <img src={% static "icons/plus.svg" %} alt="Додати" class="edit__ico">
+                </a> 
+                <a href={% url "change_faq" faq.pk %}>
+                    <img src={% static "icons/edit.svg" %} alt="Редагувати" class="edit__ico">
+                </a>
+                <a href={% url "delete_faq" faq.pk %}>
+                    <img src={% static "icons/delete.svg" %} alt="Видалити" class="edit__ico">
+                </a>
+            </div>
+            <div class="part">
+                {% for question in faq.questions.all %}
+                    <div class="accordion__wrapper">
+                        <button class="accordion">{{question.question}}</button>
+                        <div class="panel">
+                            <p> {{question.answer|safe}} </p>
+                            <div class="edit__wrapper">
+                                <a href={% url "change_one_faq" question.pk %}>
+                                    <img src={% static "icons/edit.svg" %} alt="Редактировать" class="edit__ico">
+                                </a>
+                                <a href={% url "delete_one_faq" question.pk %}>
+                                    <img src={% static "icons/delete.svg" %} alt="Редактировать" class="edit__ico">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+{% else %}
+<a href={% url "user_login" %} class="btn background-white">АВТОРИЗУЙТЕСЬ</a>
+{% endif %}
+{% endblock %}

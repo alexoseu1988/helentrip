@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+<div class="slideshow">
+    <div class="slideshow-item">
+        <img src={% static "img/banner.jpg" %} alt="">
+        <div class="slideshow-item-text">
+            <h1>ВСІ ТУРИ</h1>
+        </div>
+    </div>
+    <div class="slideshow-item">
+        <img src={% static "img/come_with_us.jpg" %} alt="">
+        <div class="slideshow-item-text">
+            <h1>ВСІ ТУРИ</h1>
+        </div>
+    </div>
+    <div class="slideshow-item">
+        <img src={% static "img/pets.jpg" %} alt="">
+        <div class="slideshow-item-text">
+            <h1>ВСІ ТУРИ</h1>
+        </div>
+    </div>
+    <div class="slideshow-item">
+        <img src={% static "img/tourists.jpg" %} alt="">
+        <div class="slideshow-item-text">
+            <h1>ВСІ ТУРИ</h1>          
+        </div>
+    </div>
+</div>
+
+<main>
+    <section class="section">
+        {% for tour in tours %}
+            <div class="card">
+                <a href="{% url 'tour' tour.pk %}">
+                    {% if tour.dateStart > today %}
+                        <div class="card__badge">Залишилось місць: {{ tour.seats }}</div>
+                    {% else %}
+                        <div class="card__badge">Очікується</div>
+                    {% endif %}
+                    <img class="card__img" src="{{ tour.background1.url }}" alt="{{ tour.title1 }}">
+                    <div class="card__text">
+                        <h3>{{ tour.title1 }}</h3>
+                        {% if tour.dateStart > today %}
+                            <p>{{ tour.dateStart|date:"d E" }} {% if tour.isOneDay %} {% else %} - {{ tour.dateEnd|date:"d E" }} {% endif %}</p>
+                        {% else %}    
+                            <p>НЕЗАБАРОМ...</p>
+                        {% endif %}
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </section>
+
+{% endblock %}

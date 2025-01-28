@@ -1,0 +1,2739 @@
+$color-white: white
+$color-grey: #b9b9b9
+$color-pink: #ff597a
+$color-pink2: #fd6281
+$color-background: #fff0f0
+$color-background2: #ffe0e0
+$text-color: #4d4d4d
+$footer-color: #dfdfdf
+$color-green: #4d9b39
+$color-blue: #738BF0
+$color-transparent: #ffffffc8
+
+$radius: 20pt
+$radius-small: 5pt
+$line-main: 3pt solid $color-pink
+
+/* Importing Google fonts - Inter  */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Yesteryear&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Yesteryear&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400..700&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Yesteryear&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400..700&family=Pacifico&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Yesteryear&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400..700&family=Pacifico&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Tenor+Sans&family=Yesteryear&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400..700&family=Pacifico&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Tenor+Sans&family=Yesteryear&family=Zen+Kurenaido&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400..700&family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Tenor+Sans&family=Yesteryear&family=Zen+Kurenaido&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400..700&family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Doodle+Shadow&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Tenor+Sans&family=Yesteryear&family=Zen+Kurenaido&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400..700&family=Great+Vibes&family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Doodle+Shadow&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Tenor+Sans&family=Yesteryear&family=Zen+Kurenaido&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&family=Bad+Script&family=Caveat:wght@400..700&family=Great+Vibes&family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Doodle+Shadow&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Tenor+Sans&family=Yesteryear&family=Zen+Kurenaido&display=swap');
+
+
+@mixin respond($breakpoint)
+    @if $breakpoint == smallphone
+        @media(max-width: 475px)
+            @content
+    @if $breakpoint == phone
+        @media(max-width: 600px)
+            @content
+    @if $breakpoint == tablet
+        @media(max-width: 1024px)
+            @content
+    @if $breakpoint == desctop
+        @media(max-width: 1200px)
+            @content
+    @if $breakpoint == bigdesctop
+        @media(max-width: 1600px)
+            @content
+
+
+@mixin form-style($color, $text-color, $border-color, $button-color, $button-background)
+    padding: 1rem
+    background-color: $color
+    border-radius: $radius
+    h2
+        text-align: left
+        @include respond(desctop)
+            text-align: left
+        @include respond(tablet)
+            text-align: center
+        @include respond(phone)
+            text-align: center
+        color: $color-white
+        margin-bottom: 5pt
+    hr
+        width: 50%
+        @include respond(desctop)
+            width: 70%
+        @include respond(tablet)
+            width: 100%
+        @include respond(phone)
+            width: 100%
+        border: 2pt solid $color-pink
+    p
+        color: $text-color
+        label
+            display: block
+            margin-bottom: .2rem
+        input, select, textarea
+            font-size: 1.1rem
+            border: .1rem solid $color-pink
+            padding: 5pt
+            border-radius: .5rem
+        input, textarea
+            width: 100%
+        select
+            width: 30%
+            margin-right: 2rem
+    button
+        display: block
+        padding: 0.5rem 1.5rem
+        border-radius: $radius
+        background-color: $button-background
+        color: $button-color
+        cursor: pointer
+        font-size: 1.6rem
+        font-weight: 600
+        text-align: center
+
+
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    font-family: "Roboto", sans-serif
+
+body
+    color: $text-color
+    margin: 0
+    background-color: $color-background
+
+h2
+    font-size: 2.5rem
+    @include respond(desctop)
+        font-size: 1.8rem
+    @include respond(tablet)
+        font-size: 1.5rem
+    @include respond(phone)
+        font-size: 1.2rem
+    text-align: center
+    color: $color-white
+    text-shadow: 0 0 5pt black, 0 0 10pt black, 0 0 15pt black, 0 0 20pt black
+    margin-bottom: 20pt
+
+h3
+    margin-bottom: 10pt
+
+p
+    margin-top: 10pt
+    margin-bottom: 10pt
+
+button
+    border: none
+    outline: hidden
+
+.cross, .cross1, .cross2, .cross3, .cross4, .certificate
+    cursor: pointer
+
+.icon-menu, .contacts-icon
+    cursor: pointer
+
+.main-menu, .booking-form, .certificate-form, .contacts
+    position: fixed
+    display: none
+
+.main-menu, .booking-form, .contacts, .certificate-form
+    border-radius: $radius
+    width: 45%
+    @include respond(bigdesctop)
+        width: 55%
+    @include respond(desctop)
+        width: 60%
+    @include respond(tablet)
+        width: 85%
+    @include respond(phone)
+        width: 96%
+    height: 95vh
+    overflow-y: auto
+    overflow-x: hidden
+    scrollbar-width: none
+    left: 50%
+    top: 3%
+    @include respond(bigdesctop)
+        top: 5%
+    @include respond(desctop)
+        top: 5%
+    @include respond(tablet)
+        top: 2.5%
+    @include respond(phone)
+        top: 2.5%
+    transform: translateX(-50%)
+    z-index: 5
+    background-color: $color-pink
+    &__logo1
+        width: 250pt
+        position: absolute
+        top: 10pt
+        left: -100pt
+        transform: rotate(-45deg)
+    &__logo2
+        width: 250pt
+        position: absolute
+        top: 160pt
+        left: -100pt
+        transform: rotate(-45deg)
+    &__logo3
+        width: 250pt
+        position: absolute
+        top: 310pt
+        left: -100pt
+        transform: rotate(-45deg)
+    &__logo4
+        width: 250pt
+        position: absolute
+        top: 460pt
+        left: -100pt
+        transform: rotate(-45deg)
+    &__logo5
+        width: 250pt
+        position: absolute
+        top: 610pt
+        left: -100pt
+        transform: rotate(-45deg)
+
+    &__logo6
+        width: 250pt
+        position: absolute
+        top: 10pt
+        left: 70pt
+        transform: rotate(-45deg)
+    &__logo7
+        width: 250pt
+        position: absolute
+        top: 160pt
+        left: 70pt
+        transform: rotate(-45deg)
+    &__logo8
+        width: 250pt
+        position: absolute
+        top: 310pt
+        left: 70pt
+        transform: rotate(-45deg)
+    &__logo9
+        width: 250pt
+        position: absolute
+        top: 460pt
+        left: 70pt
+        transform: rotate(-45deg)
+    &__logo10
+        width: 250pt
+        position: absolute
+        top: 610pt
+        left: 70pt
+        transform: rotate(-45deg)
+
+    &__logo11
+        width: 250pt
+        position: absolute
+        top: 10pt
+        left: 240pt
+        transform: rotate(-45deg)
+    &__logo12
+        width: 250pt
+        position: absolute
+        top: 160pt
+        left: 240pt
+        transform: rotate(-45deg)
+    &__logo13
+        width: 250pt
+        position: absolute
+        top: 310pt
+        left: 240pt
+        transform: rotate(-45deg)
+    &__logo14
+        width: 250pt
+        position: absolute
+        top: 460pt
+        left: 240pt
+        transform: rotate(-45deg)
+    &__logo15
+        width: 250pt
+        position: absolute
+        top: 610pt
+        left: 240pt
+        transform: rotate(-45deg)
+
+    &__logo16
+        width: 250pt
+        position: absolute
+        top: 10pt
+        left: 410pt
+        transform: rotate(-45deg)
+    &__logo17
+        width: 250pt
+        position: absolute
+        top: 160pt
+        left: 410pt
+        transform: rotate(-45deg)
+    &__logo18
+        width: 250pt
+        position: absolute
+        top: 310pt
+        left: 410pt
+        transform: rotate(-45deg)
+    &__logo19
+        width: 250pt
+        position: absolute
+        top: 460pt
+        left: 410pt
+        transform: rotate(-45deg)
+    &__logo20
+        width: 250pt
+        position: absolute
+        top: 610pt
+        left: 410pt
+        transform: rotate(-45deg)
+    &__container
+        color: black
+        width: 80%
+        height: 85%
+        margin: 80px 10% 80px 10%
+        padding: 1%
+        padding-top: 2%
+        z-index: 5
+        position: relative
+        background-color: $color-transparent
+        border-radius: $radius
+
+    .cross, .cross1, .cross2, .cross3, .cross4
+        width: 40pt
+        position: absolute
+        top: 30pt
+        right: 30pt
+        cursor: pointer
+        z-index: 10
+    h2
+        margin: auto
+        margin-bottom: 2rem !important
+        font-size: 2rem
+        @include respond(bigdesctop)
+            font-size: 1.9rem
+        @include respond(desctop)
+            font-size: 1.7rem
+        @include respond(tablet)
+            font-size: 1.3rem
+        @include respond(phone)
+            font-size: 1.1rem
+        width: 98% 
+        text-align: center !important
+        display: block
+        text-shadow: 0 0 5pt black, 0 0 10pt black, 0 0 15pt black, 0 0 20pt black
+    label
+        font-weight: 600
+        margin-bottom: 0
+    ul
+        display: block
+        text-align: center
+        position: relative
+        top: 50%
+        transform: translateY(-50%)
+        z-index: 6
+        @include respond(tablet)
+            margin-top: 10pt
+            margin-bottom: 10pt
+        @include respond(phone)
+            margin-top: 10pt
+            margin-bottom: 10pt
+    li
+        margin-bottom: 3vh
+        @include respond(bigdesctop)
+            margin-bottom: 2.5vh
+        @include respond(desctop)
+            margin-bottom: 2.5vh
+        @include respond(tablet)
+            margin-bottom: 2vh
+        @include respond(phone)
+            margin-bottom: 2vh
+    li:last-child
+        margin-bottom: 0pt
+    a
+        display: inline-block
+        width: 300pt
+        margin: 0 auto
+        padding: 3vh 0pt
+        @include respond(bigdesctop)
+            padding: 3vh 0pt
+        @include respond(desctop)
+            padding: 3vh 0pt
+        @include respond(tablet)
+            padding: 2.5vh 0pt
+        @include respond(phone)
+            padding: 2.5vh 0pt
+        border-radius: $radius
+        color: $color-pink
+        background: $color-white
+        text-decoration: none
+        font-size: 2rem  
+        @include respond(desctop)
+            font-size: 2rem
+        @include respond(tablet)
+            font-size: 2rem
+        @include respond(phone)
+            font-size: 2rem
+        font-weight: 600
+        div
+            display: flex
+            justify-content: flex-start
+            align-items: center
+            width: 90%
+            img
+                height: 48pt
+                margin: 0pt 10pt
+                @include respond(desctop)
+                    height: 48pt
+                @include respond(tablet)
+                    height: 40pt
+                @include respond(phone)
+                    height: 32pt
+        div:hover img
+            height: 60pt
+            margin: 10pt
+            @include respond(desctop)
+                height: 60pt
+            @include respond(tablet)
+                height: 40pt
+                margin: 0pt 10pt
+            @include respond(phone)
+                height: 32pt
+                margin: 0pt 10pt
+
+.certificate-thank
+    position: relative
+    margin-bottom: 20pt
+
+.certificate-thank
+    border-radius: $radius
+    width: 768px
+    @include respond(tablet)
+        width: 600px
+    @include respond(phone)
+        width: 96%
+    height: 800px
+    overflow: hidden
+    left: 50%
+    top: 5%
+    transform: translateX(-50%)
+    z-index: 5
+    background-color: $color-pink
+    &__logo1
+        width: 250pt
+        position: absolute
+        top: 10pt
+        left: -100pt
+        transform: rotate(-45deg)
+    &__logo2
+        width: 250pt
+        position: absolute
+        top: 160pt
+        left: -100pt
+        transform: rotate(-45deg)
+    &__logo3
+        width: 250pt
+        position: absolute
+        top: 310pt
+        left: -100pt
+        transform: rotate(-45deg)
+    &__logo4
+        width: 250pt
+        position: absolute
+        top: 460pt
+        left: -100pt
+        transform: rotate(-45deg)
+    &__logo5
+        width: 250pt
+        position: absolute
+        top: 610pt
+        left: -100pt
+        transform: rotate(-45deg)
+
+    &__logo6
+        width: 250pt
+        position: absolute
+        top: 10pt
+        left: 70pt
+        transform: rotate(-45deg)
+    &__logo7
+        width: 250pt
+        position: absolute
+        top: 160pt
+        left: 70pt
+        transform: rotate(-45deg)
+    &__logo8
+        width: 250pt
+        position: absolute
+        top: 310pt
+        left: 70pt
+        transform: rotate(-45deg)
+    &__logo9
+        width: 250pt
+        position: absolute
+        top: 460pt
+        left: 70pt
+        transform: rotate(-45deg)
+    &__logo10
+        width: 250pt
+        position: absolute
+        top: 610pt
+        left: 70pt
+        transform: rotate(-45deg)
+
+    &__logo11
+        width: 250pt
+        position: absolute
+        top: 10pt
+        left: 240pt
+        transform: rotate(-45deg)
+    &__logo12
+        width: 250pt
+        position: absolute
+        top: 160pt
+        left: 240pt
+        transform: rotate(-45deg)
+    &__logo13
+        width: 250pt
+        position: absolute
+        top: 310pt
+        left: 240pt
+        transform: rotate(-45deg)
+    &__logo14
+        width: 250pt
+        position: absolute
+        top: 460pt
+        left: 240pt
+        transform: rotate(-45deg)
+    &__logo15
+        width: 250pt
+        position: absolute
+        top: 610pt
+        left: 240pt
+        transform: rotate(-45deg)
+
+    &__logo16
+        width: 250pt
+        position: absolute
+        top: 10pt
+        left: 410pt
+        transform: rotate(-45deg)
+    &__logo17
+        width: 250pt
+        position: absolute
+        top: 160pt
+        left: 410pt
+        transform: rotate(-45deg)
+    &__logo18
+        width: 250pt
+        position: absolute
+        top: 310pt
+        left: 410pt
+        transform: rotate(-45deg)
+    &__logo19
+        width: 250pt
+        position: absolute
+        top: 460pt
+        left: 410pt
+        transform: rotate(-45deg)
+    &__logo20
+        width: 250pt
+        position: absolute
+        top: 610pt
+        left: 410pt
+        transform: rotate(-45deg)
+
+    &__container
+        color: black
+        width: 80%
+        height: 640px
+        margin: 80px 10% 80px 10%
+        padding: 5%
+        padding-top: 5%
+        @include respond(tablet)
+            padding-top: 10%
+        @include respond(phone)
+            padding-top: 18%
+        z-index: 5
+        position: relative
+        background-color: #ffffffc8
+        border-radius: $radius
+        text-align: center
+        h2
+            color: black
+            font-family: "Rubik Doodle Shadow", system-ui
+            font-weight: 900
+            font-style: normal
+            font-size: 52px
+            @include respond(tablet)
+                font-size: 40px
+            @include respond(phone)
+                font-size: 32px
+    &__label
+        font-size: 27px
+        font-family: Georgia, 'Times New Roman', Times, serif
+        font-weight: bold
+        margin-bottom: 3pt
+    &__name
+        padding: 3pt 30pt
+        font-family: "Great Vibes", cursive
+        font-weight: 400
+        font-style: normal
+        font-size: 52px
+        @include respond(tablet)
+            font-size: 40px
+        @include respond(phone)
+            font-size: 32px
+        font-weight: bold
+        margin-bottom: 14pt
+    &__content
+        padding: 3pt 30pt
+        border-radius: $radius
+        font-size: 52px
+        @include respond(tablet)
+            font-size: 40px
+        @include respond(phone)
+            font-size: 32px
+        font-weight: bold
+        margin-bottom: 14pt
+    &__waiting
+        padding: 15pt 30pt
+        border-radius: $radius
+        // background-color: $color-white
+        font-size: 1.6rem
+        @include respond(tablet)
+            font-size: 1.2rem
+        @include respond(phone)
+            font-size: 1.0rem
+        font-weight: bold
+        margin-bottom: 15pt
+
+.header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin: 0 3%
+    &__left
+        display: flex
+        justify-content: flex-start
+        align-items: center
+    &__right
+        display: flex
+        justify-content: flex-end
+        align-items: center
+        .contacts-icon
+            display: flex
+            justify-content: flex-end
+            align-items: center
+            span
+                display: inline-block
+                color: #FD393F
+
+                //font-family: "Bad Script", cursive
+                //font-family: "Segoe Script", cursive
+                //font-family: "Mistral", cursive
+                font-family: "Roboto", sans-serif
+                font-weight: 700
+                font-style: normal
+                font-size: 2.2rem
+                margin: 6pt 12pt 0 0
+                @include respond(desctop)
+                    font-size: 2.2rem
+                    margin: 6pt 12pt 0 0
+                @include respond(tablet)
+                    font-size: 1.7rem
+                    margin: 6pt 12pt 0 0
+                @include respond(phone)
+                    font-size: 1.3rem
+                    margin: 3pt 8pt 0 0
+    img
+        height: 48pt
+        margin: 10pt
+        @include respond(desctop)
+            height: 48pt
+            margin: 10pt
+        @include respond(tablet)
+            height: 40pt
+            margin: 7pt
+        @include respond(phone)
+            height: 32pt
+            margin: 5pt
+        @include respond(smallphone)
+            height: 28pt
+            margin: 3pt
+
+.banner
+    width: 100%
+    min-height: 70vh
+    margin-bottom: 30pt
+    padding: 20pt 0
+    background-image: url(../img/banner.jpg)
+    background-position: center
+    background-size: cover
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    flex-wrap: wrap
+    gap: 15pt
+    h1, h2, h3, div
+        color: $color-white
+        text-shadow: 0 0 5pt black, 0 0 10pt black, 0 0 15pt black, 0 0 20pt black
+    h1
+        font-size: 3rem  
+        @include respond(desctop)
+            font-size: 3rem
+        @include respond(tablet)
+            font-size: 2rem
+        @include respond(phone)
+            font-size: 1.5rem
+    h2
+        font-size: 2.5rem  
+        @include respond(desctop)
+            font-size: 2.5rem
+        @include respond(tablet)
+            font-size: 1.5rem
+        @include respond(phone)
+            font-size: 1rem
+    h3
+        font-size: 2rem  
+        @include respond(desctop)
+            font-size: 1.6rem
+        @include respond(tablet)
+            font-size: 1.2rem
+        @include respond(phone)
+            font-size: 1rem
+    & .button
+        color: $color-white
+        background: $color-pink
+        text-shadow: none
+        font-size: 1.2rem
+        font-weight: 600
+
+.about-me
+    position: relative
+    margin-bottom: 20pt
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-wrap: wrap
+    padding: 0 7%
+    gap: 3%
+    &__photo
+        width: 31%
+        aspect-ratio: 1 / 1
+        border-radius: 50%
+        border: solid 3pt $color-white
+        @include respond(tablet)
+            width: 80%
+            aspect-ratio: 3 / 2
+            border-radius: 0
+            border: none
+            margin-bottom: 20pt
+        @include respond(phone)
+            width: 100%
+            aspect-ratio: 4 / 3
+            border-radius: 0
+            border: none
+            margin-bottom: 20pt
+        object-fit: cover
+    &__photo-left
+        display: none
+        @include respond(tablet)
+            display: block
+            width: 80%
+            aspect-ratio: 3 / 2
+            border-radius: 0
+            border: none
+            margin-bottom: 20pt
+        @include respond(phone)
+            display: block
+            width: 100%
+            aspect-ratio: 4 / 3
+            border-radius: 0
+            border: none
+            margin-bottom: 20pt
+        object-fit: cover
+    &__photo-right
+        width: 31%
+        aspect-ratio: 1 / 1
+        border-radius: 50%
+        border: solid 3pt $color-white
+        @include respond(tablet)
+            display: none
+        @include respond(phone)
+            display: none
+        object-fit: cover
+    &__text
+        width: 65%
+        @include respond(tablet)
+            width: 80%
+        @include respond(phone)
+            width: 100%
+        p
+            text-align: left
+            display: inline-block
+            width: 90%
+            @include respond(desctop)
+                width: 90%
+            @include respond(tablet)
+                width: 98%
+            @include respond(phone)
+                width: 98%
+            font-weight: 400
+            margin: 0 auto
+            margin-bottom: 10pt
+            padding: 10pt 20pt
+            border-radius: $radius
+            color: $text-color
+            background: $color-white
+            font-size: 1.2rem
+            line-height: 20pt
+            @include respond(desctop)
+                font-size: 1rem
+            @include respond(tablet)
+                font-size: 1rem
+            @include respond(phone)
+                font-size: 1rem
+            font-weight: 400
+        
+.section
+    position: relative
+    margin-bottom: 10pt
+    display: flex
+    justify-content: center
+    align-items: stretch
+    flex-wrap: wrap
+    padding: 0 3%
+    gap: 3%
+    @include respond(desctop)
+        padding: 0 2%
+        gap: 2%
+    @include respond(tablet)
+        padding: 0 2%
+        gap: 2%
+    @include respond(phone)
+        padding: 0 3%
+        gap: 3%
+
+.section-buttons
+    margin-bottom: 10pt
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-wrap: wrap
+    padding: 0 3%
+    gap: 1%
+    @include respond(desctop)
+        padding: 0 2%
+        gap: 2%
+    @include respond(tablet)
+        padding: 0 2%
+        gap: 2%
+    @include respond(phone)
+        padding: 0 3%
+        gap: 3%
+
+.part
+    max-width: 1200pt
+    padding: 0 3%
+    margin: auto
+    margin-bottom: 50pt
+
+.why_we
+    padding: 30pt 0
+    margin-bottom: 0
+    h2
+        color: $color-white
+        text-shadow: 0 0 5pt black, 0 0 10pt black, 0 0 15pt black, 0 0 20pt black
+
+.about_me
+    margin-bottom: 10pt
+    display: flex
+    justify-content: center
+    align-items: stretch
+    flex-wrap: wrap
+    padding: 0 3%
+    &__me
+        width: 30%
+
+
+.card
+    aspect-ratio: 1 / 1.3
+    width: 20%
+    @include respond(bigdesctop)
+        width: 24%
+    @include respond(desctop)
+        width: 31%
+    @include respond(tablet)
+        width: 45%
+    @include respond(phone)
+        width: 80%
+    margin-bottom: 35pt
+    border-radius: $radius
+    //box-shadow: 0pt 0pt 15pt 10pt $color-grey
+    position: relative
+    text-align: center
+    background-color: $color-white
+    // &:hover
+    //     box-shadow: 0pt 0pt 10pt $footer-color
+    hr
+        color: $color-pink
+    a
+        text-decoration: none
+        color: $color-white
+    h3
+        font-size: 1.4rem
+        @include respond(desctop)
+            font-size: 1rem
+        @include respond(tablet)
+            font-size: 1rem
+        @include respond(phone)
+            font-size: 1.2rem
+    &__innder-div
+        height: 100%
+        width: 100%
+    &__details
+        text-align: right
+        text-decoration: underline
+        margin-right: 10pt
+    &__img
+        display: block
+        border-radius: $radius
+        width: 100%
+        height: 100%
+        object-fit: cover
+    &__text
+        position: absolute
+        bottom: 20pt
+        left: 0
+        right: 0
+        text-align: center
+        padding: 5pt
+        z-index: 2
+        color: $color-white
+        text-shadow: 0 0 5pt black, 0 0 10pt black, 0 0 15pt black, 0 0 20pt pink
+        p
+            font-size: 1.4rem
+            @include respond(desctop)
+                font-size: 1.2rem
+            @include respond(tablet)
+                font-size: 1.2rem
+            @include respond(phone)
+                font-size: 1.2rem
+        a
+            display: inline-block
+            margin: 0 0 5pt 0
+    &__ico
+        width: 30%
+        margin: 20pt 20pt 0pt 20pt
+    &__description
+        text-align: center
+        padding: 10pt
+        z-index: 2
+        color: $text-color
+        h3
+            margin-bottom: 1rem
+            @include respond(bigdesctop)
+                margin-bottom: 1rem
+            @include respond(desctop)
+                margin-bottom: 1rem
+            @include respond(tablet)
+                margin-bottom: 1rem
+            @include respond(phone)
+                margin-bottom: 2rem
+            line-height: 1.4
+        p
+            margin-top: 1rem
+            @include respond(bigdesctop)
+                margin-top: 1rem
+            @include respond(desctop)
+                margin-top: 1rem
+            @include respond(tablet)
+                margin-top: 1rem
+            @include respond(phone)
+                margin-top: 2rem
+            line-height: 1.4
+            @include respond(desctop)
+                line-height: 1.5
+            @include respond(tablet)
+                line-height: 1.5
+            @include respond(phone)
+                line-height: 1.6
+    &__badge
+        width: fit-content
+        border-top-right-radius: $radius
+        border-bottom-right-radius: $radius
+        margin: 4pt 0 4pt
+        position: absolute
+        top: 30pt
+        z-index: 3
+        color: $color-white
+        background: $color-pink
+        padding: 4pt 16pt 4pt 8pt
+        font-size: 1.2rem
+        font-weight: 600
+
+.small-card
+    aspect-ratio: 1 / 1.3
+    width: 19%
+    @include respond(bigdesctop)
+        width: 21%
+    @include respond(desctop)
+        width: 29%
+    @include respond(tablet)
+        width: 39%
+    @include respond(phone)
+        width: 48%
+    margin: 0 5pt 40pt 5pt
+    @include respond(bigdesctop)
+        margin: 0 5pt 40pt 5pt
+    @include respond(desctop)
+        margin: 0 0pt 30pt 0pt
+    @include respond(tablet)
+        margin: 0 0pt 40pt 0pt
+    @include respond(phone)
+        margin: 0 0pt 20pt 0pt
+    border-radius: $radius
+    position: relative
+    text-align: center
+    background-color: $color-white
+    hr
+        background-color: $color-pink
+        height: 2px
+        border: none
+        margin-top: 1pt
+        margin-bottom: 1pt
+    a
+        text-decoration: none
+        color: $color-white
+    h3
+        font-weight: bold
+        font-size: 1rem
+        @include respond(bigdesctop)
+            font-size: 1rem
+        @include respond(desctop)
+            font-size: 1.2rem
+        @include respond(tablet)
+            font-size: 1rem
+            margin-bottom: 0
+        @include respond(phone)
+            font-size: 1rem
+            padding-bottom: 0
+    &__inner-div
+        height: 100%
+        width: 100%
+        display: flex
+        // flex-direction: column
+        justify-content: center
+        align-items: stretch
+        align-content: stretch
+        flex-wrap: wrap
+    &__inner-div-lifehack
+        height: 100%
+        width: 100%
+        border-radius: $radius
+        border: $line-main
+        display: flex
+        justify-content: center
+        align-items: center
+        text-align: center
+        h3
+            color: black
+            text-transform: uppercase
+            font-size: 2rem
+        // color: black
+        // text-transform: uppercase
+        // font-size: 5rem
+    &__details
+        width: 100%
+        text-align: right
+        text-decoration: underline
+        margin-top: 20pt
+        margin-right: 10pt
+    &__ico
+        width: 30%
+        margin: 10pt 10pt 0pt 10pt
+        @include respond(bigdesctop)
+            margin: 5pt 5pt 0pt 5pt
+        @include respond(desctop)
+            margin: 15pt 15pt 0pt 15pt
+        @include respond(tablet)
+            margin: 7pt 7pt 0pt 7pt
+        @include respond(phone)
+            margin: 5pt 1pt 0pt 1pt
+    &__description
+        width: 100%
+        text-align: center
+        padding: 10pt
+        z-index: 2
+        color: $text-color
+        h3
+            margin-bottom: .5rem
+            @include respond(bigdesctop)
+                margin-bottom: .5rem
+            @include respond(desctop)
+                margin-bottom: 1rem
+            @include respond(tablet)
+                margin-bottom: .5rem
+            @include respond(phone)
+                margin-bottom: .5rem
+            line-height: 1.4
+        p
+            line-height: 1.4
+            margin-top: 1rem
+            @include respond(bigdesctop)
+                margin-top: 1rem
+            @include respond(desctop)
+                margin-top: 1rem
+            @include respond(tablet)
+                margin-top: 1rem
+                line-height: 1.2
+            @include respond(phone)
+                margin-top: .5rem
+                line-height: 1.2
+
+.lifehack
+    aspect-ratio: 1 / 1.3
+    width: 19%
+    @include respond(bigdesctop)
+        width: 21%
+    @include respond(desctop)
+        width: 29%
+    @include respond(tablet)
+        width: 39%
+    @include respond(phone)
+        width: 48%
+    margin: 0 5pt 40pt 5pt
+    @include respond(bigdesctop)
+        margin: 0 5pt 40pt 5pt
+    @include respond(desctop)
+        margin: 0 0pt 30pt 0pt
+    @include respond(tablet)
+        margin: 0 0pt 40pt 0pt
+    @include respond(phone)
+        margin: 0 0pt 20pt 0pt
+    border-radius: $radius
+    position: relative
+    text-align: center
+    background-color: $color-pink
+    overflow: hidden
+
+    img
+        width: 150pt
+        position: absolute
+        transform: rotate(-45deg)
+
+    &__logo1
+        top: 20pt
+        left: -50pt
+    &__logo2
+        top: 115pt
+        left: -50pt
+    &__logo3
+        top: 210pt
+        left: -50pt
+    &__logo4
+        top: 305pt
+        left: -50pt
+    &__logo5
+        top: 400pt
+        left: -50pt
+
+    &__logo6
+        top: 20pt
+        left: 50pt
+    &__logo7
+        top: 115pt
+        left: 50pt
+    &__logo8
+        top: 210pt
+        left: 50pt
+    &__logo9
+        top: 305pt
+        left: 50pt
+    &__logo10
+        top: 400pt
+        left: 50pt
+
+    &__logo11
+        top: 20pt
+        left: 150pt
+    &__logo12
+        top: 115pt
+        left: 150pt
+    &__logo13
+        top: 210pt
+        left: 150pt
+    &__logo14
+        top: 305pt
+        left: 150pt
+    &__logo15
+        top: 400pt
+        left: 150pt
+
+    a
+        text-decoration: none
+        color: $color-white
+    h3
+        font-weight: bold
+        font-size: 1rem
+        @include respond(bigdesctop)
+            font-size: 1rem
+        @include respond(desctop)
+            font-size: 1.2rem
+        @include respond(tablet)
+            font-size: 1rem
+            margin-bottom: 0
+        @include respond(phone)
+            font-size: 1rem
+            padding-bottom: 0
+    &__inner-div-lifehack
+        height: 100%
+        width: 100%
+        border-radius: $radius
+        border: $line-main
+        display: flex
+        justify-content: center
+        align-items: center
+        text-align: center
+        h3
+            width: 90%
+            padding: 1rem
+            border-radius: $radius
+            color: black
+            background-color: $color-white
+            text-transform: uppercase
+            font-size: 2rem
+            z-index: 5
+
+
+.rotate
+    aspect-ratio: 1 / 1.3
+    @include respond(bigdesctop)
+        aspect-ratio: 1 / 1.0
+    @include respond(desctop)
+        aspect-ratio: 1 / 1.1
+    @include respond(tablet)
+        aspect-ratio: 1 / 1.0
+    @include respond(phone)
+        aspect-ratio: 1 / 1.6
+    width: 30%
+    @include respond(bigdesctop)
+        width: 45%
+    @include respond(desctop)
+        width: 48%
+    @include respond(tablet)
+        width: 90%
+    @include respond(phone)
+        width: 99%
+    margin-bottom: 35pt
+    border-radius: $radius
+    text-align: center
+    perspective: 1500pt
+    position: relative
+    cursor: pointer
+    &__card
+        width: 100%
+        height: 100%
+        transition: 1s all ease
+        backface-visibility: hidden
+        position: absolute
+        top: 0
+        left: 0
+        &_front
+            border-radius: $radius
+        &_back
+            text-align: left
+            vertical-align: middle
+            padding: 3% 5%
+            background-color: $color-white
+            border-radius: $radius
+            transform: rotateY(180deg)
+            ul
+                list-style-type: none
+                line-height: 1.8rem
+                @media(max-width: 1700px)
+                    line-height: 1.6rem
+                @media(max-width: 1600px)
+                    line-height: 1.8rem
+                @media(max-width: 1380px)
+                    line-height: 1.6rem
+                @media(max-width: 1315px)
+                    line-height: 1.4rem
+                @media(max-width: 1200px)
+                    line-height: 1.5rem
+                @media(max-width: 1120px)
+                    line-height: 1.4rem
+                @media(max-width: 1100px)
+                    line-height: 1.3rem
+                @media(max-width: 1024px)
+                    line-height: 1.8rem
+                @media(max-width: 670px)
+                    line-height: 1.6rem
+                @media(max-width: 640px)
+                    line-height: 1.4rem
+                @media(max-width: 600px)
+                    line-height: 1.8rem
+                @media(max-width: 475px)
+                    line-height: 1.6rem
+                @media(max-width: 450px)
+                    line-height: 1.4rem
+    &__img
+        display: block
+        border-radius: $radius
+        width: 100%
+        height: 100%
+        object-fit: cover
+    &__ico
+        display: inline-block
+        height: 80pt
+        animation: finger 2s infinite
+    &__tap-me
+        width: 60pt
+        height: 60pt
+        border-radius: 40pt
+        border: solid 5pt $color-white
+        margin: auto
+        margin-bottom: -20pt
+        background-color: #ffffff00
+        animation: tapme 2s infinite
+    &__text
+        position: absolute
+        bottom: 50pt
+        left: 0
+        right: 0
+        text-align: center
+        padding: 10pt
+        color: $color-white
+        text-shadow: 0 0 5pt black, 0 0 10pt black, 0 0 15pt black, 0 0 20pt pink
+    h3
+        font-size: 1.4rem
+        margin-bottom: 30pt
+        @include respond(desctop)
+            font-size: 1.2rem
+        @include respond(tablet)
+            font-size: 1.2rem
+        @include respond(phone)
+            font-size: 1.2rem
+
+.rotated .rotate__card_front
+    transform: rotateY(180deg)
+
+.rotated .rotate__card_back
+    transform: rotateY(0deg)
+
+@keyframes tapme
+    35%
+        transform: scale(1.2)
+    70%
+        transform: scale(1.4)
+    100%
+        transform: scale(1.6)
+
+@keyframes finger
+    0%
+        transform: rotateX(0deg)
+    100%
+        transform: rotateX(30deg) translateY(-30pt)
+        //transform: 
+
+
+
+.price
+    aspect-ratio: 1 / 1.3
+    width: 20%
+    @include respond(bigdesctop)
+        width: 21%
+    @include respond(desctop)
+        width: 30%
+    @include respond(tablet)
+        width: 45%
+    @include respond(phone)
+        width: 80%
+    margin-bottom: 35pt
+    border-radius: $radius
+    border: $line-main
+    position: relative
+    text-align: center
+    background-color: $color-white
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    &__ico
+        height: 25%
+        margin: auto
+        margin-top: 10%
+        margin-bottom: 8%
+    &__inner
+        height: 50%
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        margin-bottom: 7%
+    h3
+        width: fit-content
+        margin: auto
+        margin-top: 8%
+        margin-bottom: 8%
+        color: black
+        font-size: 2.2rem
+        @include respond(desctop)
+            font-size: 1.2rem
+        @include respond(tablet)
+            font-size: 1.2rem
+        @include respond(phone)
+            font-size: 1.2rem
+    a
+        text-decoration: none
+    &__price
+        width: fit-content
+        margin: auto
+        margin-top: 0
+        margin-bottom: 10%
+        padding: 0rem 1.2rem
+        color: $color-pink
+        font-size: 2.3rem
+        font-weight: 600
+    &__crossout
+        width: fit-content
+        margin: auto
+        margin-top: 0%
+        margin-bottom: 5%
+        padding: 0 2rem
+        color: $text-color
+        font-size: 1.5rem
+        text-decoration: line-through
+        font-weight: 600
+    &__date
+        color: black
+        font-size: 1rem
+        font-weight: 600
+        margin-bottom: 10pt
+    &__inner-div
+        height: 100%
+        width: 100%
+        display: flex
+        justify-content: center
+        align-items: stretch
+        align-content: stretch
+        flex-wrap: wrap
+
+.review
+    width: 47%
+    @include respond(tablet)
+        width: 93%
+    margin-bottom: 30pt
+    padding: .5rem
+    border-radius: $radius
+    background-color: $color-white
+    border: $line-main
+    // box-shadow: 0pt 0pt 10pt 5pt $color-grey
+    position: relative
+    display: flex
+    justify-content: flex-start
+    a
+        text-decoration: none
+        color: $color-white
+    h3
+        font-size: 1.4rem
+        @include respond(desctop)
+            font-size: 1.2rem
+        @include respond(tablet)
+            font-size: 1.2rem
+        @include respond(phone)
+            font-size: 1.2rem
+    &__left
+        display: flex
+        justify-content: flex-start
+        align-items: center
+        width: fit-content
+        img
+            height: 60pt
+            margin: 20pt
+            @include respond(desctop)
+                height: 48pt
+                margin: 10pt
+            @include respond(tablet)
+                height: 60pt
+                margin: 20pt
+            @include respond(phone)
+                height: 48pt
+                margin: 10pt
+    &__right
+        display: block
+        div
+            width: fit-content
+            padding: .2rem 1rem
+            
+            border-radius: $radius-small
+            color: $color-white
+            background-color: $color-pink
+        p
+            font-size: 1.2rem
+
+
+.form-admin
+    width: 100%
+    margin: 2rem 5% 2rem 5%
+
+.find-certificate
+    text-align: center
+    margin: 2rem 5% 2rem 5%
+    p
+        display: inline-block
+    label
+        margin-bottom: .5rem
+        font-size: 1.1rem
+    input
+        width: 50%
+        @include respond(desctop)
+            width: 30%
+        @include respond(tablet)
+            width: 40%
+        @include respond(phone)
+            width: 50%
+        padding: .5rem 1rem
+        border-radius: $radius-small
+        font-size: 1.1rem
+    button
+        padding: 0.5rem 1.5rem
+        border-radius: $radius
+        background-color: $color-pink
+        color: $color-white
+        cursor: pointer
+        font-size: 1.6rem
+        font-weight: 600
+        text-align: center
+
+.form-container
+    label
+        margin-bottom: .5rem
+        font-size: 1.1rem
+        display: block
+    input
+        width: 50%
+        @include respond(desctop)
+            width: 70%
+        @include respond(tablet)
+            width: 80%
+        @include respond(phone)
+            width: 90%
+        padding: .5rem 1rem
+        border-radius: $radius-small
+        font-size: 1.1rem
+    textarea
+        width: 50%
+        @include respond(desctop)
+            width: 70%
+        @include respond(tablet)
+            width: 80%
+        @include respond(phone)
+            width: 90%
+        padding: .2rem 1rem
+        border-radius: $radius-small
+        font-size: 1.1rem
+    select
+        width: 10%
+        @include respond(desctop)
+            width: 15%
+        @include respond(tablet)
+            width: 20%
+        @include respond(phone)
+            width: 30%
+        padding: .2rem 1rem
+        border-radius: $radius-small
+        font-size: 1.1rem
+    button
+        display: block
+        padding: 0.5rem 1.5rem
+        border-radius: $radius
+        background-color: $color-pink
+        color: $color-white
+        cursor: pointer
+        font-size: 1.6rem
+        font-weight: 600
+        text-align: center
+
+.inclusive
+    aspect-ratio: 1 / 1.3
+    width: 20%
+    @include respond(bigdesctop)
+        width: 21%
+    @include respond(desctop)
+        width: 30%
+    @include respond(tablet)
+        width: 40%
+    @include respond(phone)
+        width: 48%
+    margin-bottom: 35pt
+    border-radius: $radius
+    //box-shadow: 0pt 0pt 15pt 10pt $color-grey
+    position: relative
+    text-align: center
+    background-color: $color-white
+    border: $line-main
+    padding: .2rem
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    &__description
+        text-align: left
+        margin-left: 5pt
+    &__price
+        font-size: 1.4rem
+        margin-bottom: 1rem
+        font-weight: 600
+    img
+        height: 48pt
+        margin: 0rem 1.5rem 1.5rem 3rem
+        @include respond(desctop)
+            height: 48pt
+            margin: 0rem 1.5rem 1.5rem 3rem
+        @include respond(tablet)
+            height: 48pt
+            margin: 0rem 1.5rem 1.5rem 3rem
+        @include respond(phone)
+            height: 48pt
+            margin: 0rem 1.5rem 1.5rem 3rem
+    h3
+        margin-bottom: 1rem
+        padding: 0
+        font-size: 1.4rem
+        @include respond(desctop)
+            font-size: 1.2rem
+        @include respond(tablet)
+            font-size: 1.2rem
+        @include respond(phone)
+            font-size: 1.2rem
+    p
+        margin-top: 0pt
+        margin-bottom: 0pt
+    
+.useful
+    width: 300pt
+    height: 400pt
+    border-radius: $radius
+    background-color: $text-color
+    color: $color-white
+    font-size: 2.5rem
+    font-weight: 900
+    text-decoration: none
+    display: flex
+    justify-content: center
+    align-items: center
+    text-align: center
+        
+
+.simple-text
+    padding: 0pt 3% 20pt 3%
+
+.photo-with-text
+    display: flex
+    justify-content: left
+    align-items: top
+    flex-wrap: wrap
+    margin: 0 3% 20pt 3%
+    &__photo
+        object-fit: cover
+        width: 40%
+        @include respond(bigdesctop)
+            width: 40%
+        @include respond(desctop)
+            width: 40%
+        @include respond(tablet)
+            width: 100%
+        @include respond(phone)
+            width: 100%
+        img
+            width: 100%
+    &__text
+        padding: 20pt 30pt
+        width: 60%
+        @include respond(bigdesctop)
+            width: 60%
+        @include respond(desctop)
+            width: 60%
+        @include respond(tablet)
+            width: 100%
+        @include respond(phone)
+            width: 100%
+        ul
+            text-align: center
+            li
+                text-align: left
+                display: inline-block
+                width: 90%
+                @include respond(desctop)
+                    width: 90%
+                @include respond(tablet)
+                    width: 98%
+                @include respond(phone)
+                    width: 98%
+                font-weight: 400
+                margin: 0 auto
+                margin-bottom: 10pt
+                padding: 10pt 20pt
+                border-radius: $radius
+                color: $text-color
+                background: $color-white
+                font-size: 1rem
+                line-height: 20pt
+                @include respond(desctop)
+                    font-size: 1rem
+                @include respond(tablet)
+                    font-size: 1rem
+                @include respond(phone)
+                    font-size: 1rem
+                font-weight: 400
+
+.section-feedback
+    padding: 5rem 5%
+    &__wrapper
+        display: flex
+        gap: 2%
+        justify-content: left
+        flex-wrap: wrap
+    &__feedback
+        width: 49%
+        @include respond(desctop)
+            width: 100%
+        position: relative
+        background-color: $color-white
+        padding: 3rem
+        margin-bottom: 3rem
+        border-radius: 1rem
+        border: .1rem solid $color-white
+        display: flex
+        gap: 3rem
+        justify-content: left
+        img
+            height: 5rem
+            width: 5rem
+        & span
+            display: inline-block
+            font-size: 2.5rem
+            font-weight: 800
+            margin-right: 3rem
+            border-bottom: .2rem solid $color-pink
+        p
+            a
+                &:link, &:visited
+                    color: $color-pink
+
+.form-wrapper
+    @include form-style($text-color, $color-white, $color-white, $color-white, $color-pink)
+
+.section-book
+    position: relative
+    padding: 1rem 1%
+    z-index: 7
+    &__wrapper
+        display: flex
+        gap: 2%
+        justify-content: left
+        flex-wrap: wrap
+    &__feedback
+        width: 49%
+        @include respond(desctop)
+            width: 100%
+        position: relative
+        background-color: $color-white
+        padding: 3rem
+        margin-bottom: 3rem
+        border-radius: 1rem
+        border: .1rem solid $color-white
+        display: flex
+        gap: 3rem
+        justify-content: left
+    form
+        z-index: 8
+        p
+            z-index: 9
+            margin-top: 2pt
+            margin-bottom: 0
+            label
+                font-size: 1.2rem
+                font-weight: 500
+                z-index: 9
+                margin-bottom: 3pt
+            input
+                z-index: 9
+                margin-bottom: 5pt
+                padding: 10pt
+            select
+                z-index: 9
+                margin-bottom: 5pt
+                padding: 10pt
+        button
+            margin-top: 10pt
+
+.form-book
+    @include form-style(#ffffff00, $text-color, $text-color, $color-white, $text-color)
+    z-index: 7
+
+.contacts1
+    padding: 5rem 5%
+    border-radius: $radius
+    ul
+        text-align: center
+        list-style-type: none
+    a
+        display: inline-block
+        width: 100%
+        margin: 0 auto
+        margin-bottom: 20pt
+        padding: 7pt 4pt
+        border-radius: $radius
+        color: $color-pink
+        background: $color-white
+        text-decoration: none
+        font-size: 2.5rem  
+        @include respond(desctop)
+            font-size: 2.5rem
+        @include respond(tablet)
+            font-size: 2.5rem
+        @include respond(phone)
+            font-size: 2rem
+        font-weight: 600
+        div
+            display: flex
+            justify-content: flex-start
+            align-items: center
+            gap: 1rem
+            width: 90%
+            img
+                height: 5rem
+                margin: 10pt
+                @include respond(desctop)
+                    height: 5rem
+                    margin: 10pt
+                @include respond(tablet)
+                    height: 40pt
+                    margin: 7pt
+                @include respond(phone)
+                    height: 32pt
+                    margin: 5pt
+        div:hover img
+            height: 6rem
+            margin: 10pt
+            @include respond(desctop)
+                height: 6rem
+                margin: 10pt
+            @include respond(tablet)
+                height: 40pt
+                margin: 7pt
+            @include respond(phone)
+                height: 32pt
+                margin: 5pt
+
+.extra
+    margin: 0 auto
+    margin-bottom: 20pt
+    width: 60%
+    @include respond(desctop)
+        width: 70%
+    @include respond(tablet)
+        width: 90%
+    @include respond(phone)
+        width: 96%
+    display: flex
+    justify-content: space-around
+    align-items: center
+    flex-wrap: wrap
+    margin-bottom: 20pt
+    &__block
+        width: 48%
+        display: flex
+        align-items: center
+        margin: 1%
+        padding: 10pt
+        background-color: $color-white
+        border-radius: $radius
+        img
+            height: 50pt
+            margin: 10pt
+            @include respond(desctop)
+                height: 50pt
+                margin: 10pt
+            @include respond(tablet)
+                height: 40pt
+                margin: 7pt
+            @include respond(phone)
+                display: none
+                height: 32pt
+                margin: 5pt
+            @include respond(smallphone)
+                height: 28pt
+                margin: 3pt
+    &__block:first-child
+        background-color: $color-background
+    &__block:nth-child(2)
+        background-color: $color-background
+    &__header
+        font-size: 1.5rem
+        @include respond(desctop)
+            font-size: 1.5rem
+        @include respond(tablet)
+            font-size: 1.4rem
+        @include respond(phone)
+            font-size: 1.3rem
+        @include respond(smallphone)
+            font-size: 1.1rem
+        margin-bottom: 15pt
+        width: 100%
+        text-align: center
+        img
+            display: none
+            @include respond(phone)
+                display: block
+                height: 32pt
+                margin: 5pt auto
+            @include respond(smallphone)
+                display: block
+                height: 28pt
+                margin: 3pt auto
+
+.explanation
+    margin: 0 auto
+    width: 80%
+    text-align: center
+    h2
+        margin-bottom: 0
+    img
+        width: 20%
+    p
+        margin-bottom: 20pt
+    ol
+        text-align: left
+
+.string
+    margin: 0pt 0%
+    display: flex
+    justify-content: center
+    @include respond(desctop)
+        justify-content: flex-end
+    align-items: stretch
+    flex-wrap: wrap
+    div
+        height: 32pt
+        padding: 3pt
+        border-radius: $radius-small
+        position: relative
+    input, textarea, 
+        display: block
+        height: 32pt
+        padding: 3pt
+        border-radius: $radius-small
+    button
+        height: 32pt
+        width: 32pt
+        border-radius: $radius-small
+        cursor: pointer
+        img
+            width: 100%
+            height: 100%
+            object-fit: cover
+            padding: 0
+            margin: 0
+            border-radius: $radius-small
+    &__blockbig
+        width: 40%
+        @include respond(desctop)
+            width: 100%
+        @include respond(tablet)
+            width: 100%
+        margin-bottom: 10pt
+        background-color: #ffffff00
+        padding: 0
+        display: flex
+        justify-content: center
+        @include respond(desctop)
+            justify-content: flex-start
+        @include respond(tablet)
+            margin-bottom: 50pt
+        align-items: center
+        flex-wrap: wrap
+        gap: 0pt
+    &__blocksubbig1
+        width: 55%
+        @include respond(tablet)
+            width: 100%
+        margin-bottom: 10pt
+        background-color: #ffffff00
+        padding: 0
+        display: flex
+        justify-content: center
+        @include respond(desctop)
+            justify-content: flex-start
+        align-items: center
+        flex-wrap: nowrap
+        gap: 2pt
+    &__blocksubbig2
+        width: 45%
+        @include respond(tablet)
+            width: 100%
+        margin-bottom: 10pt
+        background-color: #ffffff00
+        padding: 0
+        display: flex
+        justify-content: center
+        @include respond(desctop)
+            justify-content: flex-start
+        align-items: center
+        flex-wrap: nowrap
+        gap: 2pt
+    &__blocksmall
+        width: 18%
+        @include respond(desctop)
+            width: 35%
+        @include respond(tablet)
+            width: 50%
+            margin-top: 5pt
+        margin-bottom: 20pt
+        min-width: 204pt
+        background-color: #ffffff00
+        padding: 0
+        display: flex
+        justify-content: flex-start
+        @include respond(desctop)
+            justify-content: flex-end
+        align-items: center
+        wrap: nowrap
+        gap: 2pt
+    &__name
+        min-width: 80pt
+        width: 40%
+        background-color: $color-white
+    &__tour
+        min-width: 80pt
+        width: 35%
+        height: 32pt
+        background-color: $color-white
+        padding: .2rem 1rem
+        border-radius: $radius-small
+        font-size: 1.1rem
+    &__status
+        width: 28%
+        background-color: $color-white
+    &__phone
+        width: 30%
+        @include respond(desctop)
+            width: 40%
+        min-width: 100pt
+        background-color: $color-white
+    &__mail
+        width: 10%
+    &__people
+        width: 25%
+        @include respond(desctop)
+            width: 30%
+        background-color: $color-white
+    &__children
+        width: 25%
+        @include respond(desctop)
+            width: 30%
+        background-color: $color-white
+    &__comment
+        width: 100%
+        background-color: $color-white
+    &__prepayment
+        min-width: 50pt
+        width: 50%
+        @include respond(desctop)
+            justify-content: flex-end
+        @include respond(tablet)
+            width: 30%
+        background-color: $color-white
+    &__prepayment-certif
+        min-width: 50pt
+        width: 50%
+        @include respond(desctop)
+            justify-content: flex-end
+        background-color: $color-white
+    &__update
+        width: 32pt
+        background-color: $color-white
+    &__book
+        width: 32pt
+        height: 32pt
+        background-color: $color-white
+        padding: 1pt
+        img
+            width: 100%
+            height: 100%
+            object-fit: cover
+            padding: 0
+            margin: 0
+            border-radius: $radius-small
+
+footer
+    padding: 1% 3%
+    display: flex
+    background-color: $footer-color
+    @include respond(tablet)
+        display: block
+        text-align: center
+    justify-content: space-around
+    align-items: center
+    flex-wrap: wrap
+    .footer__left
+        display: flex
+        justify-content: flex-start
+        @include respond(tablet)
+            display: block
+    .footer__right
+        display: flex
+        justify-content: flex-end
+        @include respond(tablet)
+            justify-content: center
+    img
+        height: 48pt
+        margin: 10pt
+        @include respond(desctop)
+            height: 48pt
+            margin: 10pt
+        @include respond(tablet)
+            height: 40pt
+            margin: 7pt
+        @include respond(phone)
+            height: 32pt
+            margin: 5pt
+
+.button
+    width: fit-content
+    text-align: center
+    margin: 0 auto
+    margin-bottom: 30pt
+    padding: 8pt 16pt
+    border-radius: $radius
+    color: $color-white
+    background: $color-pink
+    // box-shadow: 0pt 0pt 10pt $color-grey
+    // text-shadow: 0pt 0pt 0pt $color-white
+    font-size: 1.5rem
+    font-weight: 600
+    cursor: pointer
+
+.button-grey
+    width: fit-content
+    text-align: center
+    margin: 0 auto
+    margin-bottom: 30pt
+    padding: 8pt 16pt
+    border-radius: $radius
+    color: $color-white
+    background: $text-color
+    // box-shadow: 0pt 0pt 10pt $color-grey
+    // text-shadow: 0pt 0pt 0pt $color-white
+    font-size: 1.5rem
+    font-weight: 600
+    cursor: pointer
+
+.button1
+    width: fit-content
+    margin-bottom: 30pt
+    padding: 8pt 16pt
+    border-radius: $radius
+    color: $color-white
+    background: $color-pink
+    font-size: 1.5rem
+    font-weight: 600
+    cursor: pointer
+
+.phone
+    display: none
+    @include respond(phone)
+        display: block
+
+.edit
+    &__wrapper
+        display: flex
+        justify-content: flex-end
+        position: relative
+        bottom: 10pt
+        right: 10pt
+    &__ico
+        height: 48pt
+        margin: 10pt
+        vertical-align: middle
+
+.center
+    text-align: center
+
+.pink-color
+    color: $color-pink
+    text-shadow: none
+
+.pink2
+    background-color: $color-pink2
+
+.background2
+    background-color: $color-background2
+
+
+
+/* Адаптивный слайдер */
+
+.gallery
+    display: flex
+    align-items: center
+    justify-content: center
+    align-items: stretch
+    background-color: $color-background
+    margin-bottom: 30pt
+
+.card-wrapper
+    width: 90%
+    margin: 0 60px 35px
+    padding: 20px 10px
+    color: #ffffff00
+
+.card-list .card-item
+    list-style: none
+
+.card-list .card-item .card-link
+    display: block
+    padding: 0pt
+    user-select: none
+    border-radius: $radius
+    text-decoration: none
+    cursor: pointer
+    transition: 0.2s ease
+
+.card-list .card-item .card-link:active
+    cursor: grabbing
+
+.card-list .card-item .card-link:hover
+    border-color: $color-pink
+
+.card-list .card-link .card-image
+    width: 100%
+    border-radius: $radius
+    aspect-ratio: 9 / 14
+    object-fit: cover
+
+// .card-list .card-link .card-image:hover
+//     box-shadow: 0pt 0pt 10pt $color-pink
+
+.card-list .card-link .badge
+    color: #ffffff00
+    width: fit-content
+    border-top-right-radius: $radius
+    border-bottom-right-radius: $radius
+    margin: 4pt 0 4pt
+    position: absolute
+    top: 20pt
+    z-index: 2
+
+.card-list .card-link .badge-tour
+    color: $color-white
+    background: $color-pink
+    padding: 8pt 16pt
+    font-size: 1.2rem
+    font-weight: 600
+
+.card-wrapper .swiper-pagination-bullet
+    height: 13px
+    width: 13px
+    opacity: 0.5
+    background: $color-pink
+
+.card-wrapper .swiper-pagination-bullet-active
+    opacity: 1
+
+.card-wrapper .swiper-slide-button
+    color: $color-pink
+    margin-top: -35px
+
+/* Responsive media query code for small screens */
+@media (max-width: 768px)
+    .card-wrapper
+        margin: 0 10px 25px
+
+    .card-wrapper .swiper-slide-button
+ 
+
+/* ТАЙМЕР */
+
+.timer
+    &__items
+        display: flex
+        justify-content: center
+        gap: 1%
+        margin-bottom: 20pt
+        font-size: 7rem  
+        @include respond(desctop)
+            font-size: 6rem
+        @include respond(tablet)
+            font-size: 5rem
+        @include respond(phone)
+            font-size: 4rem
+    &__item
+        color: $color-pink
+        font-family: "Yesteryear", cursive
+        font-weight: 400
+        font-style: normal
+        position: relative
+        min-width: 60px
+        margin-left: 10px
+        margin-right: 10px
+        padding-bottom: 0px
+        text-align: center
+    &__item::before
+        content: attr(data-title)
+        display: block
+        position: absolute
+        left: 50%
+        bottom: 0
+        transform: translateX(-50%)
+        font-size: 14px
+    &__item:not(:last-child)::after
+        content: ':'
+        position: absolute
+        right: -30px
+    &__title
+        margin-bottom: 0
+        color: $color-pink
+
+
+/* АККОРДИОН */
+
+.accordion 
+	background-color: $color-background
+	color: $text-color
+	cursor: pointer
+	padding: 18pt
+	width: 100%
+	text-align: left
+	font-size: 1.5rem
+	transition: 0.4s
+
+.accordion__wrapper
+    border-top: 2pt solid $color-pink
+
+.accordion__wrapper:last-child
+    border-bottom: 2pt solid $color-pink
+
+.active, .accordion:hover 
+	background-color: $color-background
+
+.accordion:after 
+	content: '\002B'
+	color: $text-color
+	font-weight: bold
+	float: right
+	margin-left: 5px
+
+.active:after 
+	content: "\2212"
+
+.panel
+	padding: 0 18pt
+	background-color: $color-background
+	max-height: 0
+	overflow: hidden
+	transition: max-height 0.2s ease-out
+
+/* СЛАЙДЕР ДЛЯ ОПИСАНИЯ */
+
+.shedule
+    margin: 0 5%
+    @include respond(desctop)
+        margin: 0 2%
+    @include respond(tablet)
+        margin: 0 5%
+    @include respond(phone)
+        margin: 0 2%
+    &__wrapper
+        width: 100%
+        position: relative
+        display: flex
+        flex-wrap: wrap
+        gap: 20pt
+        @include respond(desctop)
+            gap: 10pt
+        @include respond(tablet)
+            gap: 20pt
+        @include respond(phone)
+            gap: 10pt
+        justify-content: space-around
+        margin-bottom: 3rem
+        background-color: #ffffff00
+        border-radius: $radius
+    &__photo
+        position: relative
+        width: 40%
+        border-radius: $radius
+        overflow: hidden
+        @include respond(desctop)
+            width: 50%
+        @include respond(tablet)
+            width: 100%
+        @include respond(phone)
+            width: 100%
+        img
+            border-radius: $radius
+            position: absolute
+            object-fit: cover
+            top: 0
+            left: 0
+            min-width: 100%
+            width: auto
+            min-height: 35rem
+            height: 100%
+            @media(max-width: 1650px)
+                min-height: 32rem
+            @media(max-width: 1500px)
+                min-height: 30rem
+            @media(max-width: 1350px)
+                min-height: 28rem
+            @media(max-width: 1200px)
+                min-height: 35rem
+            @media(max-width: 1050px)
+                min-height: 33rem
+                position: relative
+                width: 100%
+                height: auto
+            @media(max-width: 900px)
+                position: relative
+                width: 100%
+                height: auto
+            @media(max-width: 600px)
+                height: auto
+            // @media(max-width: 450px)
+            //     min-height: 40rem
+            // @media(max-width: 420px)
+            //     min-height: 38rem
+            // @media(max-width: 380px)
+            //     min-height: 36rem
+    &__text
+        flex: 1
+        display: flex
+        justify-content: center
+        align-items: stretch
+        align-content: stretch
+        flex-wrap: wrap
+
+        box-sizing: border-box
+        border-radius: $radius
+        width: 40%
+        padding: 0
+        @include respond(desctop)
+            width: 50%
+        @include respond(tablet)
+            width: 100%
+        @include respond(phone)
+            width: 100%
+        min-height: 35rem
+        @media(max-width: 1650px)
+            min-height: 32rem
+        @media(max-width: 1500px)
+            min-height: 30rem
+        @media(max-width: 1350px)
+            min-height: 28rem
+        @media(max-width: 1200px)
+            min-height: 35rem
+        @media(max-width: 1050px)
+            min-height: 32rem
+        @media(max-width: 600px)
+            min-height: 37rem
+        li
+            list-style-type: none
+    &__upper
+        width: 100%
+        height: 50%
+        margin: 0 0 20pt 0
+        padding: 3%
+        box-sizing: border-box
+        border-radius: $radius
+        background-color: $color-white
+        font-size: 1.2rem
+    &__lower
+        display: flex
+        justify-content: space-between
+        align-items: stretch
+        flex-wrap: nowrap
+        gap: 5%
+        @include respond(desctop)
+            gap: 2%
+        @include respond(tablet)
+            gap: 5%
+        @include respond(phone)
+            gap: 2%
+        width: 100%
+        height: 30%
+        margin: 0
+        padding: 0
+        border-radius: $radius
+        box-sizing: border-box
+        font-size: 1.2rem
+    &__card
+        display: flex
+        justify-content: center
+        align-items: center
+        align-content: center
+        flex-direction: column
+        gap: 10pt
+        @include respond(bigdesctop)
+            gap: 5%
+        @include respond(desctop)
+            gap: 5%
+        @include respond(tablet)
+            gap: 5%
+        @include respond(phone)
+            gap: 5%
+
+        width: 50%
+        border-radius: $radius
+        box-sizing: border-box
+        background-color: $color-white
+        h3
+            margin: 0
+            @include respond(desctop)
+                font-size: 1.2rem
+            @include respond(phone)
+                font-size: 1.1rem
+    &__price
+        width: fit-content
+        margin: 0
+        color: $color-green
+        font-size: 2.5rem
+        @include respond(desctop)
+            font-size: 2rem
+        @include respond(phone)
+            font-size: 1.6rem
+        font-weight: 500
+    &__crossout
+        margin: 0
+        color: $color-pink
+        font-size: 1.7rem
+        @include respond(desctop)
+            font-size: 1.6rem
+        @include respond(phone)
+            font-size: 1.3rem
+        text-decoration: line-through
+        font-weight: 600
+    &__date
+        color: black
+        font-size: 1rem
+        font-weight: 600
+
+    .prev, .next
+        cursor: pointer
+        position: absolute
+        transform: translate(-0%, -50%)
+        top: 50%
+        width: auto
+        padding: 33% 1rem
+        color: $color-pink
+        font-weight: 100
+        font-size: 5rem
+        transition: 0.6s ease
+    .next
+        right: 0
+    .prev:hover, .next:hover
+        background-color: rgba(255, 255, 255, 0.8)
+    &__photo-text
+        color: $color-white
+        text-shadow: (0 0 3rem rgba($color-grey, 1))
+        font-size: 20px
+        font-weight: 600
+        padding: 8px 12px
+        position: absolute
+        bottom: 40px
+        left: 50%
+        transform: translateX(-50%)
+    .dots
+        position: absolute
+        bottom: 20px
+        left: 50%
+        transform: translateX(-50%)
+    .dot
+        cursor: pointer
+        height: 13px
+        width: 13px
+        margin: 0 2px
+        background-color: $color-white
+        border-radius: 50%
+        display: inline-block
+        transition: background-color 0.6s ease
+    .active
+        height: 16px
+        width: 16px
+        background-color: $color-pink
+    .dot:hover
+        background-color: $color-pink
+
+
+/* СЛАЙДЕР НА ГЛАВНОМ ЭКРАНЕ */
+
+.slideshow
+    width: 100%
+    height: 70vh
+    position: relative
+    overflow: hidden
+    background: #000
+    margin: 20px 0
+
+.slideshow-item
+    width: 100%
+    height: 100%
+    position: absolute
+    opacity: 0
+    animation: slideanim 20s infinite
+    pointer-events: none
+
+.slideshow-item:nth-child(1),
+.slideshow-item:nth-child(1) img 
+    animation-delay: 0
+
+.slideshow-item:nth-child(2),
+.slideshow-item:nth-child(2) img 
+    animation-delay: 5s
+
+.slideshow-item:nth-child(3),
+.slideshow-item:nth-child(3) img 
+    animation-delay: 10s
+
+.slideshow-item:nth-child(4),
+.slideshow-item:nth-child(4) img 
+    animation-delay: 15s
+
+.slideshow-item img 
+    width: 100%
+    height: 100%
+    object-fit: cover
+    animation: zoom 20s infinite
+
+.slideshow-item-text 
+    width: 100%
+    text-align: center
+    position: absolute
+    bottom: 50%
+    left: 50%
+    transform: translate(-50%, 50%)
+    color: $color-white
+
+.slideshow-item-text h1
+    color: $color-white
+    text-shadow: 0 0 5pt black, 0 0 10pt black, 0 0 15pt black, 0 0 20pt black
+    font-size: 3rem
+    @include respond(desctop)
+        font-size: 3rem
+    @include respond(tablet)
+        font-size: 2rem
+    @include respond(phone)
+        font-size: 1.5rem
+
+// .slideshow-item-text p 
+//     font-size: 15px
+//     margin-bottom: 10px
+
+@keyframes slideanim 
+    12.5%
+        opacity: 1
+        pointer-events: auto
+    25%
+        opacity: 1
+        pointer-events: auto
+    37.5%
+        opacity: 0
+
+@keyframes zoom 
+    50%
+        transform: scale(1.3)
+
+@media screen and (max-width: 1100px)
+    .slideshow-item-text
+        max-width: 100%
+
+@media screen and (max-width: 456px)
+    .slideshow-item-text 
+        bottom: 0
+        left: 0
+        max-width: 100%
+    .slideshow-item-text h1
+        font-size: 18px
+    .slideshow-item-text p 
+        font-size: 13px
+
+
+//ТАБ-БЛОКИ
+
+body 
+    -webkit-text-size-adjust: 100%
+    -webkit-tap-highlight-color: transparent
+
+.tab-container
+    margin: 1rem
+    padding: 1rem 10%
+
+.tab
+    display: flex
+    flex-direction: column
+
+.tab-nav > input[type="radio"]
+    display: none
+
+.tab-content
+    display: none
+    border: 2px solid $color-pink
+    border-radius: $radius
+    //border-top-left-radius: 0
+    padding: 2rem
+    background-color: $color-white
+    font-size: 1.2rem
+    &__ico
+        display: block
+        text-align: center
+        margin: 0 auto
+        width: 15%
+    h3
+        text-align: center
+
+#content-1:has(~ .tab-nav > #tab-btn-1:checked),
+#content-2:has(~ .tab-nav > #tab-btn-2:checked),
+#content-3:has(~ .tab-nav > #tab-btn-3:checked),
+#content-4:has(~ .tab-nav > #tab-btn-4:checked)
+    display: block
+
+.tab-nav
+    display: flex
+    flex-wrap: wrap
+    gap: .5rem
+    //border-bottom: 1px solid #dee2e6
+    margin-bottom: 1rem
+    order: -1
+
+.tab-nav > label 
+    display: block
+    padding: 0.5rem 1rem
+    color: $text-color
+    text-decoration: none
+    background: 0 0
+    border: 2px solid transparent
+    border-color: $color-pink
+    margin-bottom: -1px
+    border-radius: $radius
+    //border-top-left-radius: $radius-small
+    //border-top-right-radius: $radius-small
+    -webkit-appearance: button
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out
+    cursor: pointer
+
+.tab-nav > input[type="radio"]:checked + label
+    color: #000
+    font-weight: bold
+    background-color: $color-white
+    border-color: $color-pink
+    //border-color: #dee2e6 #dee2e6 #fff
+    cursor: pointer

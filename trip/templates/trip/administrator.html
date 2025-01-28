@@ -1,0 +1,312 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+<div class="slideshow">
+    <div class="slideshow-item">
+        <img src={% static "img/banner.jpg" %} alt="">
+        <div class="slideshow-item-text">
+            <h1>СКАЖИ "ТАК" НОВИМ ВРАЖЕННЯМ!</h1>
+        </div>
+    </div>
+    <div class="slideshow-item">
+        <img src={% static "img/banner2.jpg" %} alt="">
+        <div class="slideshow-item-text">
+            <h1>СКАЖИ "ТАК" НОВИМ ВРАЖЕННЯМ!</h1>
+        </div>
+    </div>
+    <div class="slideshow-item">
+        <img src={% static "img/banner3.jpg" %} alt="">
+        <div class="slideshow-item-text">
+            <h1>СКАЖИ "ТАК" НОВИМ ВРАЖЕННЯМ!</h1>
+        </div>
+    </div>
+    <div class="slideshow-item">
+        <img src={% static "img/banner4.jpg" %} alt="">
+        <div class="slideshow-item-text">
+            <h1>СКАЖИ "ТАК" НОВИМ ВРАЖЕННЯМ!</h1>          
+        </div>
+    </div>
+</div>
+
+{% if user.username == "helentrip" %}
+
+    <div class="section-buttons">
+        <a href={% url "dashboard" %} class="button1">Панель управления</a>
+        <a href={% url "dash_certificates" %} class="button1">Сертификаты</a>
+        <a href={% url "user_logout" %} class="button1">Вихід</a>
+    </div>
+
+    <main>
+        
+
+        <div>
+            <h2>РОЗКЛАД ТУРІВ</h2>
+
+            <div class="section-buttons">
+                <a href={% url "new_tour" %} class="button1">Створити тур</a>
+                <a href={% url "create_tour" %} class="button1">Створити тур автоматично</a>
+            </div>
+
+            <section class="section">
+                {% for tour in tours %}
+                    <div class="card">
+                        <a href="{% url 'tour' tour.pk %}">
+                            <img class="card__img" src="{{ tour.background1.url }}" alt="Назва туру">
+                            <div class="card__text">
+                                <h3>{{ tour.title1 }}</h3>
+                                <p>{{ tour.dateStart|date:"d E" }} {% if tour.isOneDay %} {% else %} - {{ tour.dateEnd|date:"d E" }} {% endif %}</p>
+                                <div>
+                                    <a class="button" href="{% url 'tour' tour.pk %}">ДЕТАЛЬНІШЕ</a>
+                                    <a class="button" href="{% url 'edit_tour' tour.pk %}">РЕДАГУВАТИ</a>
+                                    <a class="button" href="{% url 'change_tour' tour.pk %}">ПЕРЕПИСАТИ</a>
+                                    {% if tour.isActive %}
+                                    <a class="button" href="{% url 'activate_tour' tour.pk %}">ДЕАКТИВУВАТИ</a>
+                                    {% else %}
+                                    <a class="button-grey" href="{% url 'activate_tour' tour.pk %}">АКТИВУВАТИ</a>
+                                    {% endif %}
+                                    
+                                    <a class="button" href="{% url 'delete_tour' tour.pk %}">ВИДАЛИТИ</a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </section>
+        </div>
+
+        <div class="why_we background2">    {% comment %} style="background: url({% static "img/why_we.jpg" %}) center / cover no-repeat; " {% endcomment %}
+            <h2>ЧИМ Я МОЖУ ВАМ ДОПОМОГТИ</h2>
+            <section class="section">
+                
+                <div class="small-card">
+                    <a href="#tours">
+                    <div class="small-card__innder-div">
+                        <img class="small-card__ico" src="{% static "icons/route1.svg" %}" alt="Авторські програми">
+                        <div class="small-card__description">
+                            <h3>АВТОРСЬКІ ПРОГРАМИ</h3>
+                            <hr>
+                            <p>Авторські програми групових турів по Україні та за кордон</p>
+                            <p class="small-card__details">Детальніше</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+                <div class="small-card">
+                    <a href="{% url "extras" %}">
+                    <div class="small-card__innder-div">
+                        <img class="small-card__ico" src="{% static "icons/route2.svg" %}" alt="Індивідуальні подорожі">
+                        <div class="small-card__description">
+                            <h3>ІНДИВІДУАЛЬНІ ПОДОРОЖІ</h3>
+                            <hr>
+                            <p>Створення індивідуальних подорожей особисто під ваші потреби</p>
+                            <p class="small-card__details">Детальніше</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+                <div class="small-card">
+                    <a href="{% url "extras" %}">
+                    <div class="small-card__innder-div">
+                        <img class="small-card__ico" src="{% static "icons/ticket2.svg" %}" alt="Допомога з бронюванням">
+                        <div class="small-card__description">
+                            <h3>ДОПОМОГА З БРОНЮВАННЯМ</h3>
+                            <hr>
+                            <p>Допомога з бронюванням квитків та готелів, оформленням документів</p>
+                            <p class="small-card__details">Детальніше</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+                <div class="small-card">
+                    <a href="{% url "extras" %}">
+                    <div class="small-card__innder-div">
+                        <img class="small-card__ico" src="{% static "icons/consult.svg" %}" alt="Консультації">
+                        <div class="small-card__description">
+                            <h3>КОНСУЛЬТАЦІЇ</h3>
+                            <hr>
+                            <p>Консультаційна допомога щодо особистих мандрівок</p>
+                            <p class="small-card__details">Детальніше</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+                <div class="small-card">
+                    <a href="{% url "extras" %}">
+                    <div class="small-card__innder-div">
+                        <img class="small-card__ico" src="{% static "icons/consult.svg" %}" alt="Консультації">
+                        <div class="small-card__description">
+                            <h3>ОРГАНІЗАЦІЯ ТРАНСФЕРУ</h3>
+                            <hr>
+                            <p>Організація трансферу</p>
+                            <p class="small-card__details">Детальніше</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+                <div class="small-card certificate">
+                    <div class="small-card__innder-div">
+                        <img class="small-card__ico" src="{% static "icons/gift.svg" %}" alt="Консультації">
+                        <div class="small-card__description">
+                            <h3>ПОДАРУНКОВІ СЕРТИФІКАТИ</h3>
+                            <hr>
+                            <p>Придбайте поїздку у подарунок</p>
+                            <p class="small-card__details">Придбати</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+        </div>
+
+        <div>
+            <br><br>
+            <h2>ГАЛЕРЕЯ</h2>
+            <div class="gallery">
+                <div class="container swiper">
+                    <div class="card-wrapper">
+                        <!-- Card slides container -->
+                        <ul class="card-list swiper-wrapper">
+                            {% for image in images %}
+                                <li class="card-item swiper-slide">
+                                    <a href="{% url "tour" image.tour.pk %}" class="card-link">
+                                        <img src="{{image.image.url}}" alt="{{image.tour.title1}}" class="card-image">
+                                        <p class="badge badge-tour">{{image.tour.title}}</p>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                
+                        <!-- Pagination -->
+                        <div class="swiper-pagination"></div>
+                    
+                        <!-- Navigation Buttons -->
+                        <div class="swiper-slide-button swiper-button-prev"></div>
+                        <div class="swiper-slide-button swiper-button-next"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-buttons">
+                <a href={% url "galery" %} class="button1">ПЕРЕГЛЯНУТИ ВСІ ФОТО</a>
+            </div>
+        </div>
+
+        <section class="background2">
+            <br><br>
+            <h2>ПРО МЕНЕ</h2>
+            <div class="about-me">
+                <img class="about-me__photo" src={{ contacts.photo1.url }} alt="Я">
+                <div class="about-me__text">
+                    {{ contacts.aboutme1|safe }}
+                </div>
+            </div>
+            <div class="about-me">
+                <img class="about-me__photo-left" src={{ contacts.photo2.url }} alt="Я">
+                <div class="about-me__text">
+                    {{ contacts.aboutme2|safe }}
+                </div>
+                <img class="about-me__photo-right" src={{ contacts.photo2.url }} alt="Я">
+            </div>
+            <div class="about-me">
+                <img class="about-me__photo" src={{ contacts.photo3.url }} alt="Я">
+                <div class="about-me__text">
+                    {{ contacts.aboutme3|safe }}
+                </div>
+            </div>
+            <div class="section-buttons">
+                <a href={% url "change_about_me" %} class="button1">РЕДАГУВАТИ</a>
+            </div>
+            <br>
+        </section>
+        
+        <div class="reviews">
+            <br><br>
+            <h2>ВІДГУКИ</h2>
+            <div class="section">
+                {% for review in reviews %}
+                <div class="review">
+                    <div class="review__left">
+                        <img src={% static "icons/star2.svg" %} alt="Відгук">
+                    </div>
+                    <div class="review__right">
+                        <h3>{{review.name}}</h3>
+                        <div><a href="{% url 'tour' review.tour.pk %}">{{review.tour}}</a></div>
+                        <p>{{review.review|safe}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="section-buttons">
+                <a href={% url "all_reviews" %} class="button1">УСІ ВІДГУКИ</a>
+            </div>
+        </div>
+    </main>
+    <div class="certificate-form">
+        <img class="cross4" src={% static "icons/cross_white.svg" %} alt="ЗАКРИТИ">
+        <img class="main-menu__logo1" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo2" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo3" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo4" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo5" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo6" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo7" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo8" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo9" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo10" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo11" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo12" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo13" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo14" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo15" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <!-- <img class="main-menu__logo16" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO"> -->
+        <img class="main-menu__logo17" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo18" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo19" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo20" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+
+        <section class="section-book">
+            <div class="form-book">
+                <div class="half">
+                    <h2>ЗАМОВИТИ ПОДАРУНКОВИЙ СЕРТИФІКАТ</h2>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.media }}
+                        {{ form.as_p }}
+                        <button type="submit">ЗАМОВИТИ</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <script src={% static "script.js" %}></script>
+    <script src={% static "script1.js" %}></script>
+    <script>
+        const certificates = document.querySelectorAll('.certificate')
+        const certificateForm = document.querySelector('.certificate-form')
+        const cross4 = document.querySelector('.cross4')
+
+        for (let certificate of certificates) {
+        certificate.addEventListener('click', openCertificateForm)
+        console.log('Button pressed')
+        }
+
+        cross4.addEventListener('click', closeCertificateForm)
+
+        function openCertificateForm(event) {
+        certificateForm.style.display = "block";
+        }
+
+        function closeCertificateForm(event) {
+        certificateForm.style.display = "none";
+        }
+    </script>
+{% else %}
+<a href={% url "user_login" %} class="btn background-white">АВТОРИЗУЙТЕСЬ</a>
+{% endif %}
+{% endblock %}

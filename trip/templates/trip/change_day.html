@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+{% if user.username == "helentrip" %}
+    <div class="form-admin">
+
+        <a href="{% url 'edit_tour' tour.pk %}" class="btn background-turq">ВЕРНУТЬСЯ В ТУР</a>
+        <br><br><br>
+
+        <form class="form-container" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <button type="submit" >ЗАПИСАТЬ</button>
+        </form>
+
+    </div>
+    
+{% else %}
+<a href={% url "user_login" %} class="button">АВТОРИЗУЙТЕСЬ</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,362 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+    <div class="banner" style="background: url({{ tour.background1.url }}) center / cover no-repeat;">
+        <h1>{{ tour.title1 }} </h1>
+        {% if tour.dateStart > today %}
+        <h3>{{ tour.dateStart|date:"d E" }} {% if tour.isOneDay %} {% else %} - {{ tour.dateEnd|date:"d E" }} {% endif %}</h3>
+        {% else %}
+        <h3>НЕЗАБАРОМ...</h3>
+        {% endif %}
+    </div>
+
+    {% if tour.dateStart > today %}
+    <h2 class="pink-color">ДО ПОЇЗДКИ ЗАЛИШИЛОСЬ:</h2>
+
+    <div class="timer">
+        <div class="timer__items">
+            <div class="timer__item timer__days">00</div>
+            <div class="timer__item timer__hours">00</div>
+            <div class="timer__item timer__minutes">00</div>
+            <div class="timer__item timer__seconds">00</div>
+        </div>
+      </div>
+    <div class="button booking">ЗАБРОНЮВАТИ</div>
+    {% endif %}
+
+    <main>
+        <section class="shedule">
+            <div class="shedule__wrapper">
+                <div class="shedule__photo">
+                    {% for image in images %}
+                        <div class="shedule__myslide">
+                            <img src="{{image.image.url}}" alt="{{image.tour.title1}}">
+                        </div>
+                    {% endfor %}
+
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                    <div class="dots">
+                        {% for image in images %}
+                            <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="shedule__text">
+                    <div class="shedule__upper">
+                        <p>{{ tour.description|safe }}</p>
+                    </div>
+                    <h2>ВАРТІСТЬ</h2>
+                    <div class="shedule__lower">
+                        <div class="shedule__card">
+                            {% if ifDateAdult %}<h3>ДОРОСЛІ: <span class="shedule__price">  {{ tour.priceAdultBefore }} </span> {{ tour.currency }}</h3>
+                            {% else %}<h3>ДОРОСЛІ: &nbsp;<span class="shedule__price">  {{ tour.priceAdult }}  </span> &nbsp; {{ tour.currency }}</h3> {% endif %}
+                            {% if ifDateAdult %} <h3>(замість &nbsp;<span class="shedule__crossout"> {{ tour.priceAdult }} </span> &nbsp; {{ tour.currency }})</h3> {% endif %}
+                            {% if ifDateAdult %} <div class="shedule__date">до {{ tour.dateBeforeAdult|date:"d.m.Y" }} </div> {% endif %}
+                        </div>
+                        <div class="shedule__card">
+                            <h3>
+                                ДІТИ: 
+                                <span class="shedule__price"> {% if ifDateChild %} {{ tour.priceChildBefore }} {{ tour.currency }} {% else %} {{ tour.priceChild }} {{ tour.currency }} {% endif %}</span>
+                            </h3>
+                            {% if ifDateChild %} <div class="shedule__crossout">{{ tour.priceChild }} {{ tour.currency }}</div> {% endif %}
+                            {% if ifDateChild %} <div class="shedule__date">до {{ tour.dateBeforeChild|date:"d.m.Y" }} </div> {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% if days.0 %}
+        <div class="part">
+            <h2>ПРОГРАМА</h2>
+            {% if tour.isOneDay%}
+                <p>{{days.0.description|safe}}</p>
+            {% else %}
+            {% for day in days %}
+                <div class="accordion__wrapper">
+                    <button class="accordion">ДЕНЬ {{day.number}} - {{day.title}}</button>
+                    <div class="panel">
+                        <p class="accordion__p">{{day.description|safe}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if tour.descriptionPdf%}
+        <div class="section-buttons">
+            <a href="{% url 'open_pdf' tour.pk %}" class="button1">ЗАВАНТАЖИТИ ПОВНУ ПРОГРАМУ</a>
+        </div>
+        {% endif %}
+
+        {% if tour.galeryImages.all %}
+            <div>
+                <h2>ГАЛЕРЕЯ</h2>
+                <div class="gallery">
+                    <div class="container swiper">
+                        <div class="card-wrapper">
+                            <!-- Card slides container -->
+                            <ul class="card-list swiper-wrapper">
+                                {% for image in tour.galeryImages.all %}
+                                    <li class="card-item swiper-slide">
+                                        <a href="{% url 'tour_galery' tour.pk %}" class="card-link">
+                                            <img src="{{image.image.url}}" alt="{{tour.title1}}" class="card-image">
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                    
+                            <!-- Pagination -->
+                            <div class="swiper-pagination"></div>
+                        
+                            <!-- Navigation Buttons -->
+                            <div class="swiper-slide-button swiper-button-prev"></div>
+                            <div class="swiper-slide-button swiper-button-next"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-buttons">
+                    <a href="{% url 'tour_galery' tour.pk %}" class="button">ПЕРЕГЛЯНУТИ ВСІ ФОТО</a>
+                </div>
+            </div>
+        {% endif %}
+
+        {% comment %} <div class="why_we background2" > style="background: url({{ tour.background2.url }}) center / cover no-repeat;"
+            <div>
+                <h2>ВАРТІСТЬ ПОДОРОЖІ</h2>
+            </div>
+            <section class="section">
+
+                <div class="price">
+                    <img class="price__ico" src="{% static "icons/children.svg" %}" alt="Авторські програми">
+                    <div class="price__inner">
+                        <h3>ДОРОСЛІ</h3>
+                        <div>
+                            {% if ifDateAdult %} <p class="price__crossout">{{ tour.priceAdult }} {{ tour.currency }}</p> {% endif %}
+                            <p class="price__price"> {% if ifDateAdult %} {{ tour.priceAdultBefore }} {{ tour.currency }} {% else %} {{ tour.priceAdult }} {{ tour.currency }} {% endif %}</p>
+                        </div>
+                        {% if ifDateAdult %} <p class="price__date">до {{ tour.dateBeforeAdult|date:"d.m.Y" }} </p> {% endif %}
+                    </div>
+                </div>
+
+                {% if tour.priceChild %}
+                <div class="price">
+                    <img class="price__ico" src="{% static "icons/children.svg" %}" alt="Авторські програми">
+                    <div class="price__inner">
+                        <h3>ДІТИ</h3>
+                        <div>
+                            {% if ifDateChild %}<p class="price__crossout">{{ tour.priceChild }} {{ tour.currency }}</p> {% endif %}
+                            <p class="price__price"> {% if ifDateChild %} {{ tour.priceChildBefore }} {{ tour.currency }} {% else %} {{ tour.priceChild }} {{ tour.currency }} {% endif %}</p>
+                        </div>
+                        {% if ifDateChild %} <p class="price__date">до {{ tour.dateBeforeChild }}</p> {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                {% if tour.pricePensioner %}
+                <div class="price">
+                    <h3>ПЕНСІОНЕРИ</h3>
+                    <p class="price__price">{{ tour.pricePensioner }} {{ tour.currency }}</p>
+                </div>
+                {% endif %}
+            </section>
+            {% if tour.dateStart > today %}
+            <div class="button booking">ЗАБРОНЮВАТИ</div>
+            {% endif %}
+        </div> {% endcomment %}
+
+        {% if cards %}
+        <div class="background2">
+            <br><br>
+            <h2>ВХОДИТЬ У ВАРТІСТЬ</h2>
+            <section class="section">
+                {% for card in cards %}
+                    <div class="inclusive">
+                        <img src="{{card.icon.icon.url}}" alt="{{card.icon.title}}">
+                        <h3>{{card.title}}</h3>
+                    </div>
+                {% endfor %}
+            </section>
+        </div>
+        {% endif %}
+
+        {% if not_cards %}
+        <div>
+            <br><br>
+            <h2>ЗА ДОДАТКОВУ ВАРТІСТЬ</h2>
+            <section class="section">
+                {% for card in not_cards %}
+                    <div class="inclusive">
+                        <img src="{{card.icon.icon.url}}" alt="{{card.icon.title}}">
+                        <h3>{{card.title}}</h3>
+                        <div class="inclusive__price">{{card.price|default_if_none:"На місці"}}</div>
+                        <p class="inclusive__description">{{card.description|safe}}</p>
+                    </div>
+                {% endfor %}
+            </section>
+        </div>
+        {% endif %}
+        
+        {% if reviews %}
+        <div class="reviews">
+            <br>
+            <h2>ВІДГУКИ</h2>
+            <div class="section">
+                {% for review in reviews %}
+                    <div class="review">
+                        <div class="review__left">
+                            <img src={% static "icons/star2.svg" %} alt="Відгук">
+                        </div>
+                        <div class="review__right">
+                            <h3>{{review.name}}</h3>
+                            <p>{{review.review|safe}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <section class="section-feedback background2">
+            <div class="form-wrapper">
+                <div class="half">
+                    <h2>ПОДІЛІТЬСЯ СВОЇМИ ВРАЖЕННЯМИ ПРО ПОЇЗДКУ</h2>
+                    <hr>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form1.media }}
+                        {{ form1.as_p }}
+                        <button type="submit">ДОДАТИ КОМЕНТАР</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <br><br>
+        <h2>НАЙБІЛЬШ ЧАСТІ ПИТАННЯ</h2>
+        {% for faq in faqs %}
+            
+            <div class="part">
+                {% for question in faq.faq.questions.all %}
+                <div class="accordion__wrapper">
+                    <button class="accordion">{{question.question}}</button>
+                    <div class="panel">
+                        <p>{{question.answer|safe}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        {% if tour.dateStart > today %}
+        <div class="button booking">ЗАБРОНЮВАТИ</div>
+        {% endif %}
+        
+        {% if upcoming_tours %}
+        <div class="why_we background2"> {% comment %} style="background: url({{ tour.background3.url }}) center / cover no-repeat;" {% endcomment %}
+            <h2>НАЙБЛИЖЧІ ПОДОРОЖІ</h2>
+            <section class="section">
+                    {% for tour in upcoming_tours %}
+                    <div class="card">
+                        <a href="{% url 'tour' tour.pk %}">
+                            <img class="card__img" src="{{ tour.background1.url }}" alt="Назва туру">
+                            <div class="card__text">
+                                <h3>{{ tour.title1 }}</h3>
+                                <p>{{ tour.dateStart|date:"d E" }} {% if tour.isOneDay %} {% else %} - {{ tour.dateEnd|date:"d E" }} {% endif %}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+            </section>
+        </div>
+        {% endif %}
+    </main>
+
+    <div class="booking-form">
+        <img class="cross1" src={% static "icons/cross_white.svg" %} alt="ЗАКРИТИ">
+        <img class="main-menu__logo1" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo2" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo3" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo4" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo5" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo6" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo7" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo8" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo9" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo10" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo11" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo12" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo13" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo14" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo15" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <!-- <img class="main-menu__logo16" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO"> -->
+        <img class="main-menu__logo17" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo18" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo19" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+        <img class="main-menu__logo20" src={% static "icons/Logo_Semi_Transparent.svg" %} alt="LOGO">
+
+        <section class="certificate-form__container">
+            <div class="form-book">
+                <div class="half">
+                    <h2>ЗАБРОНЮВАТИ ПОДОРОЖ</h2>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form2.media }}
+                        {{ form2.as_p }}
+                        <button type="submit">ЗАБРОНЮВАТИ</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Linking SwiperJS script -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Linking custom script -->
+    <script src={% static "script.js" %}></script>
+    <script src={% static "script1.js" %}></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // конечная дата, например 1 декабря 2021
+            const deadlineStr = "{{ tour.dateStart|date:'Y-m-d' }}";
+            const deadline = new Date(deadlineStr);
+            // id таймера
+            let timerId = null;
+            // склонение числительных
+            function declensionNum(num, words) {
+              return words[(num % 100 > 4 && num % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(num % 10 < 5) ? num % 10 : 5]];
+            }
+            // вычисляем разницу дат и устанавливаем оставшееся времени в качестве содержимого элементов
+            function countdownTimer() {
+              const diff = deadline - new Date();
+              if (diff <= 0) {
+                clearInterval(timerId);
+              }
+              const days = diff > 0 ? Math.floor(diff / 1000 / 60 / 60 / 24) : 0;
+              const hours = diff > 0 ? Math.floor(diff / 1000 / 60 / 60) % 24 : 0;
+              const minutes = diff > 0 ? Math.floor(diff / 1000 / 60) % 60 : 0;
+              const seconds = diff > 0 ? Math.floor(diff / 1000) % 60 : 0;
+              $days.textContent = days < 10 ? '0' + days : days;
+              $hours.textContent = hours < 10 ? '0' + hours : hours;
+              $minutes.textContent = minutes < 10 ? '0' + minutes : minutes;
+              $seconds.textContent = seconds < 10 ? '0' + seconds : seconds;
+              $days.dataset.title = declensionNum(days, ['день', 'дня', 'днів']);
+              $hours.dataset.title = declensionNum(hours, ['година', 'години', 'годин']);
+              $minutes.dataset.title = declensionNum(minutes, ['хвилина', 'хвилини', 'хвилин']);
+              $seconds.dataset.title = declensionNum(seconds, ['секунда', 'секунди', 'секунд']);
+            }
+            // получаем элементы, содержащие компоненты даты
+            const $days = document.querySelector('.timer__days');
+            const $hours = document.querySelector('.timer__hours');
+            const $minutes = document.querySelector('.timer__minutes');
+            const $seconds = document.querySelector('.timer__seconds');
+            // вызываем функцию countdownTimer
+            countdownTimer();
+            // вызываем функцию countdownTimer каждую секунду
+            timerId = setInterval(countdownTimer, 1000);
+          });
+    </script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+<div class="slideshow">
+    <div class="slideshow-item">
+        <img src={% static "img/banner.jpg" %} alt="">
+        <div class="slideshow-item-text">
+            <h1>ФОТОГАЛЕРЕЯ</h1>
+        </div>
+    </div>
+    <div class="slideshow-item">
+        <img src={% static "img/come_with_us.jpg" %} alt="">
+        <div class="slideshow-item-text">
+            <h1>ФОТОГАЛЕРЕЯ</h1>
+        </div>
+    </div>
+    <div class="slideshow-item">
+        <img src={% static "img/pets.jpg" %} alt="">
+        <div class="slideshow-item-text">
+            <h1>ФОТОГАЛЕРЕЯ</h1>
+        </div>
+    </div>
+    <div class="slideshow-item">
+        <img src={% static "img/tourists.jpg" %} alt="">
+        <div class="slideshow-item-text">
+            <h1>ФОТОГАЛЕРЕЯ</h1>          
+        </div>
+    </div>
+</div>
+
+<main>
+    <section class="section">
+        {% for tour in view_tours %}
+            <div class="card">
+                <a href="{% url 'tour_galery' tour.pk %}">
+                    <img class="card__img" src="{{ tour.background1.url }}" alt="{{ tour.title1 }}">
+                    <div class="card__text">
+                        <h3>{{ tour.title1 }}</h3>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </section>
+    
+    {% if user.username == "helentrip" %}
+    <h2>ВСІ ТУРИ</h2>
+    <section class="section">
+        {% for tour in tours %}
+            <div class="card">
+                <a href="{% url 'tour_galery' tour.pk %}">
+                    <img class="card__img" src="{{ tour.background1.url }}" alt="{{ tour.title1 }}">
+                    <div class="card__text">
+                        <h3>{{ tour.title1 }}</h3>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </section>
+        
+{% endif %}
+
+{% endblock %}

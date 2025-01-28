@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+<div class="banner" style="background: url({{ tour.background1.url }}) center / cover no-repeat;">
+    <h1>
+        {{ tour.title1 }} 
+    </h1>
+</div>
+
+<main>
+        <div class="gallery">
+            <div class="container swiper">
+                <div class="card-wrapper">
+                    <!-- Card slides container -->
+                    <ul class="card-list swiper-wrapper">
+                        {% for image in tour.galeryImages.all %}
+                            <li class="card-item swiper-slide">
+                                <a href="{% url "tour" tour.pk %}" class="card-link">
+                                    <img src="{{image.image.url}}" alt="{{tour.title1}}" class="card-image">
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+            
+                    <!-- Pagination -->
+                    <div class="swiper-pagination"></div>
+                
+                    <!-- Navigation Buttons -->
+                    <div class="swiper-slide-button swiper-button-prev"></div>
+                    <div class="swiper-slide-button swiper-button-next"></div>
+                </div>
+            </div>
+        </div>
+        <div class="section-buttons">
+            <a href="{% url "galery" %}" class="button1">ПОВЕРНУТИСЬ ДО ГАЛЕРЕЇ</a>
+        </div>
+    </div>
+    {% if user.username == "helentrip" %}
+        <div class="section-buttons">
+            <a href={% url "upload_galery_images" tour.pk %} class="button1">ЗАВАНТАЖИТИ ЗОБРАЖЕННЯ</a>
+            <a href={% url "delete_tour_galery" tour.pk %} class="button1">ВИДАЛИТИ ГАЛЕРЕЮ</a>
+        </div>
+    {% endif %}
+</main>
+{% endblock %}
