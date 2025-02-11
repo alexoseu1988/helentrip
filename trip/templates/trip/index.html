@@ -6,34 +6,51 @@
         <div class="slideshow-item">
             <img src={% static "img/banner.jpg" %} alt="">
             <div class="slideshow-item-text">
-                <h1>СКАЖИ "ТАК" НОВИМ ВРАЖЕННЯМ!</h1>
+                <h1>
+                    НЕЗАБУТНІ АВТОРСЬКІ ПОДОРОЖІ З HELEENA_TRIP
+                    <br><br>
+                    СКАЖИ "ТАК" НОВИМ ВРАЖЕННЯМ!
+                </h1>
             </div>
         </div>
         <div class="slideshow-item">
             <img src={% static "img/banner2.jpg" %} alt="">
             <div class="slideshow-item-text">
-                <h1>СКАЖИ "ТАК" НОВИМ ВРАЖЕННЯМ!</h1>
+                <h1>
+                    НЕЗАБУТНІ АВТОРСЬКІ ПОДОРОЖІ З HELEENA_TRIP
+                    <br><br>
+                    СКАЖИ "ТАК" НОВИМ ВРАЖЕННЯМ!
+                </h1>
             </div>
         </div>
         <div class="slideshow-item">
             <img src={% static "img/banner3.jpg" %} alt="">
             <div class="slideshow-item-text">
-                <h1>СКАЖИ "ТАК" НОВИМ ВРАЖЕННЯМ!</h1>
+                <h1>
+                    НЕЗАБУТНІ АВТОРСЬКІ ПОДОРОЖІ З HELEENA_TRIP
+                    <br><br>
+                    СКАЖИ "ТАК" НОВИМ ВРАЖЕННЯМ!
+                </h1>
             </div>
         </div>
         <div class="slideshow-item">
             <img src={% static "img/banner4.jpg" %} alt="">
             <div class="slideshow-item-text">
-                <h1>СКАЖИ "ТАК" НОВИМ ВРАЖЕННЯМ!</h1>          
+                <h1>
+                    НЕЗАБУТНІ АВТОРСЬКІ ПОДОРОЖІ З HELEENA_TRIP
+                    <br><br>
+                    СКАЖИ "ТАК" НОВИМ ВРАЖЕННЯМ!
+                </h1>          
             </div>
         </div>
     </div>
     <a href="{% url "dashboard" %}">Панель управления</a>
     <a href="{% url "dash_certificates" %}">Сертификаты</a>
+    <a href="{% url "dash_extras" %}">Панель сертификатов</a>
     
     <main>
         <div>
-            <h2 id="tours">НАЙБЛИЖЧІ ТУРИ</h2>
+            <h2 id="tours">НАЙБЛИЖЧІ ПОДОРОЖІ</h2>
 
             <section class="section">
                 {% for tour in tours %}
@@ -57,7 +74,7 @@
                 </div>
                 {% endfor %}
                 <div class="section-buttons">
-                    <a href={% url "all_tours" %} class="button1">ПЕРЕГЛЯНУТИ ВСІ ТУРИ</a>
+                    <a href={% url "all_tours" %} class="button1">ПЕРЕГЛЯНУТИ ВСІ ПОДОРОЖІ</a>
                 </div>
             </section>
         </div>
@@ -162,7 +179,7 @@
                         <ul class="card-list swiper-wrapper">
                             {% for image in images %}
                                 <li class="card-item swiper-slide">
-                                    <a href="{% url "tour" image.tour.pk %}" class="card-link">
+                                    <a href="{% url "tour_galery" image.tour.pk %}" class="card-link">
                                         <img src="{{image.image.url}}" alt="{{image.tour.title1}}" class="card-image">
                                         <p class="badge badge-tour">{{image.tour.title}}</p>
                                     </a>

@@ -24,15 +24,15 @@
 
     <ul>
         <li>
-            <a href="{% url "home" %}">
+            <a href="#">
                 <div>
                     <img  src={% static "icons/phone.svg" %} alt="LOGO">
-                    Телефон
+                    {{ contacts.phone }}
                 </div>
             </a>
         </li>
         <li>
-            <a href="{% url "home" %}">
+            <a href="viber://chat?number={{ contacts.phone }}">
                 <div>
                     <img  src={% static "icons/viber.svg" %} alt="LOGO">
                     Viber
@@ -40,15 +40,23 @@
             </a>
         </li>
         <li>
-            <a href="{% url "home" %}">
+            <a href="tg://resolve?domain={{ contacts.telegram }}">
                 <div>
                     <img  src={% static "icons/telegram.svg" %} alt="LOGO">
-                    Telegram
+                    Мій Телеграм
                 </div>
             </a>
         </li>
         <li>
-            <a href="{% url "home" %}">
+            <a href="{{ contacts.telegramChannel }}">
+                <div>
+                    <img  src={% static "icons/telegram.svg" %} alt="LOGO">
+                    Телеграм-канал
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="https://api.whatsapp.com/send?phone={{ contacts.phone }}">
                 <div>
                     <img  src={% static "icons/whatsapp.svg" %} alt="LOGO">
                     WhatsApp

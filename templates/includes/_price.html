@@ -1,0 +1,12 @@
+{% load static %}
+
+{% if tour.currency.pk == 1 %} 
+    {{ tour.currency }} 
+{% else %} 
+
+    {% if tour.currency.pk == 2 %} 
+        &dollar;
+    {% else %} 
+        &euro;
+    {% endif %}
+{% endif %}

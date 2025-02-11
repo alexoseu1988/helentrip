@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+
+<br>
+<a href="{% url 'dash_extras' %}"><h1 class="center">ДОДАТКОВІ ПОСЛУГИ</h1></a>
+<br>
+
+{% if user.username == "helentrip" %}
+
+<main>
+
+    <div class="section-buttons">
+        <a href={% url "dash_extras" %} class="button1">Незавершені послуги</a>
+        <a href={% url "dash_extras_completed" %} class="button1">Завершені послуги</a>
+    </div>
+    <section>
+        <div class="string">
+            <div class="string__blockbig">
+                <div class="string__blocksubbig1">
+                    <div class="string__name">Ім'я Прізвище</div>
+                    <div class="string__phone">Телефон</div>
+                    <div class="string__phone">Куди писати</div>
+                </div>
+                <div class="string__blocksubbig2">
+                    <div class="string__prepayment-certif">Дата замовлення</div>
+                    <div class="string__prepayment-certif">Тип послуги</div>
+                </div>
+            </div>
+            <div class="string__blocksmall"></div>
+        </div>
+
+        {% for extra in extras %}
+
+        <div class="string">
+            <div class="string__blockbig">
+                <div class="string__blocksubbig1">
+                    <div class="string__name" {% if extra.approved %} style="background-color: #8DF073" {% else %} style="background-color: #fd6281" {% endif %}>{{ extra.name }}</div>
+                    <div class="string__phone">{{ extra.phone }}</div>
+                    <div class="string__phone">{{ extra.communication }}</div>
+                </div>
+                <div class="string__blocksubbig2">
+                    <div class="string__prepayment-certif">{{ extra.created_at|date:'Y-m-d' }} {% if extra.completed %}<br>погашено{% endif %}</div>
+                    <div class="string__prepayment-certif">{{ extra.extraType }}</div>
+                </div>
+            </div>
+            <div class="string__blocksmall">
+                <div class="string__book"><a href="tg://msg?to={{ extra.phone }}"><img src={% static "icons/telegram.svg" %} alt="Телеграм" class="edit__ico"></a></div>
+                <div class="string__book"><a href="https://api.whatsapp.com/send?phone={{ extra.phone }}"><img src={% static "icons/whatsapp.svg" %} alt="Ватсап" class="edit__ico"></a></div>
+                <div class="string__book"><a href="viber://chat?number={{ extra.phone }}"><img src={% static "icons/viber.svg" %} alt="Вайбер" class="edit__ico"></a></div>
+                <div class="string__book"><a href="{% url 'complete_extra' extra.pk %}"><img src={% static "icons/delete.svg" %} alt="Удалить" class="edit__ico"></a></div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </section>
+</main>
+{% else %}
+<a href={% url "user_login" %} class="btn background-white">АВТОРИЗУЙТЕСЬ</a>
+{% endif %}
+{% endblock %}

@@ -18,6 +18,9 @@ urlpatterns = [
     path('dash_certificates_general', dash_certificates_general, name='dash_certificates_general'),
     path('dash_certificates_completed', dash_certificates_completed, name='dash_certificates_completed'),
     path('dash_certificates_one/<int:certificate_id>/', dash_certificates, name='dash_certificates_one'),
+    path('dash_extras', dash_extras, name='dash_extras'),
+    path('dash_extras_general', dash_extras_general, name='dash_extras_general'),
+    path('dash_extras_completed', dash_extras_completed, name='dash_extras_completed'),
     path('all_reviews', all_reviews, name='all_reviews'),
     path('galery', galery, name='galery'),
     path('documents', documents, name='documents'),
@@ -30,6 +33,7 @@ urlpatterns = [
     path('lifehack/<int:lifehack_id>/', lifehack, name='lifehack'),
     path('certificate/<int:certificate_id>/', certificate, name='certificate'),
     path('useful', useful, name='useful'),
+    path('answers', answers, name='answers'),
     
     ## Страницы с турами
     path('tour/<int:tour_id>/', tour, name='tour'),
@@ -71,6 +75,7 @@ urlpatterns = [
     path('change_about_me', change_about_me, name='change_about_me'),
     path('change_faq/<int:faq_id>/', change_faq, name='change_faq'),
     path('change_one_faq/<int:faq_id>/', change_one_faq, name='change_one_faq'),
+    path('change_lifehack/<int:lifehack_id>/', change_lifehack, name='change_lifehack'),
     
     ## Редактируем отдельные элементы тура
     path('change_title/<int:tour_id>/', change_title, name='change_title'),
@@ -95,6 +100,7 @@ urlpatterns = [
     path('delete_client/<int:client_id>/', delete_client, name='delete_client'),
     path('approve_certificate/<int:certificate_id>/', approve_certificate, name='approve_certificate'),
     path('complete_certificate/<int:certificate_id>/', complete_certificate, name='complete_certificate'),
+    path('complete_extra/<int:extra_id>/', complete_extra, name='complete_extra'),
     
     ## Удаляем объекты
     path('delete_tour/<int:tour_id>/', delete_tour, name='delete_tour'),

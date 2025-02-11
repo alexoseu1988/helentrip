@@ -175,12 +175,29 @@ class Certificate(models.Model):
     
     class Meta:
         ordering = ['-id']
+        
+class Extra(models.Model):
+    name = models.CharField(null=True, max_length=50, verbose_name="Ім'я та Прізвище, для кого подарунок")
+    phone = models.CharField(null=True, max_length=20, verbose_name="Ваш номер телефону")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата замовлення")
+    completed = models.BooleanField(default=False, verbose_name="Відпрацьовано")
+    extraType = models.ForeignKey('ExtraType', on_delete=models.PROTECT, null=True, blank=True, verbose_name="Тип додаткової послуги", related_name="extraTypes")
+    communication = models.ForeignKey('Communication', on_delete=models.PROTECT, null=True, blank=True, verbose_name="Куди Вам дзвонити / писати?")
+    
+    class Meta:
+        ordering = ['-id']
     
 class Payment(models.Model):
     percent = models.DecimalField(null=True, default=50, max_digits=3, decimal_places=0, verbose_name="% передплати")
     
     def __str__(self):
         return (str(self.percent) + '%')
+    
+class ExtraType(models.Model):
+    type = models.CharField(null=True, max_length=50, verbose_name="Тип додаткової послуги")
+    
+    def __str__(self):
+        return (self.type)
     
 class MyContacts(models.Model):
     phone = models.CharField(null=True, max_length=50, verbose_name="Номер телефону")
@@ -198,6 +215,17 @@ class MyContacts(models.Model):
     photo2 = models.ImageField(null=True, upload_to="photos/", verbose_name="Моє фото 2")
     photo3 = models.ImageField(null=True, upload_to="photos/", verbose_name="Моє фото 3")
     photo4 = models.ImageField(null=True, upload_to="photos/", verbose_name="Моє фото 4")
+    
+    titleIndex = models.CharField(null=True, max_length=100, verbose_name="Title для домашньої сторінки")
+    titleReviews = models.CharField(null=True, max_length=100, verbose_name="Title для сторінки відгуків")
+    titleFAQ = models.CharField(null=True, max_length=100, verbose_name="Для всіх FAQ")
+    titleGalery = models.CharField(null=True, max_length=100, verbose_name="Title для галереї")
+    titleDocuments = models.CharField(null=True, max_length=100, verbose_name="Title для документів")
+    titleAboutMe = models.CharField(null=True, max_length=100, verbose_name="Title для сторінки Про мене")
+    titleExtras = models.CharField(null=True, max_length=100, verbose_name="Title для додаткових послуг")
+    titleUseful = models.CharField(null=True, max_length=100, verbose_name="Title для сторінки з корисним")
+    titleLifehacks = models.CharField(null=True, max_length=100, verbose_name="Title для сторінки з лайфхаками")
+    titleAnswers = models.CharField(null=True, max_length=100, verbose_name="Title для сторінки з відповідями")
     
 class Lifehack(models.Model):
     name = models.CharField(null=True, max_length=50, verbose_name="Назва лайфхаку")

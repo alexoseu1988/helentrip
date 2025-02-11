@@ -16,9 +16,11 @@
                     <ul class="card-list swiper-wrapper">
                         {% for card in lifehack.cards.all %}
                             <li class="card-item swiper-slide">
-                                <a href="{% url "home" %}" class="card-link">
+                                <div class="card-link">
+                                <!-- <a href="{% url "home" %}" class="card-link"> -->
                                     <img src="{{card.image.url}}" alt="{{lifehack.name}}" class="card-image">
-                                </a>
+                                <!-- </a> -->
+                                </div>  
                             </li>
                         {% endfor %}
                     </ul>
@@ -39,6 +41,7 @@
     {% if user.username == "helentrip" %}
         <div class="section-buttons">
             <a href={% url "upload_lifehack_images" lifehack.pk %} class="button1">ЗАВАНТАЖИТИ ЗОБРАЖЕННЯ</a>
+            <a href={% url "change_lifehack" lifehack.pk %} class="button1">РЕДАГУВАТИ ЛАЙФХАК</a>
             <a href={% url "delete_lifehack" lifehack.pk %} class="button1">ВИДАЛИТИ ЛАЙФХАК</a>
         </div>
     {% endif %}

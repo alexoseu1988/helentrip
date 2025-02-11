@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+<div class="banner">
+    <h1>НАЙБІЛЬШ ЧАСТІ ПИТАННЯ</h1>
+</div>
+
+<main>  
+        <div class="part">
+            {% for question in faq.questions.all %}
+            <div class="accordion__wrapper">
+                <button class="accordion">{{question.question}}</button>
+                <div class="panel">
+                    <p>{{question.answer|safe}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</main>
+    
+        
+    
+
+{% endblock %}

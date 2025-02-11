@@ -69,21 +69,106 @@
                         <p>{{ tour.description|safe }}</p>
                     </div>
                     <h2>ВАРТІСТЬ</h2>
+
+                    {% if tour.priceChild %}
+
                     <div class="shedule__lower">
-                        <div class="shedule__card">
-                            {% if ifDateAdult %}<h3>ДОРОСЛІ: <span class="shedule__price">  {{ tour.priceAdultBefore }} </span> {{ tour.currency }}</h3>
-                            {% else %}<h3>ДОРОСЛІ: &nbsp;<span class="shedule__price">  {{ tour.priceAdult }}  </span> &nbsp; {{ tour.currency }}</h3> {% endif %}
-                            {% if ifDateAdult %} <h3>(замість &nbsp;<span class="shedule__crossout"> {{ tour.priceAdult }} </span> &nbsp; {{ tour.currency }})</h3> {% endif %}
+                        <div class="shedule__card width50">
+                            {% if ifDateAdult %}
+                            <h3>
+                                ДОРОСЛІ: 
+                                <span class="shedule__price">  
+                                    {{ tour.priceAdultBefore }} 
+                                </span> 
+                                {% include 'includes/_price.html' %}
+                            </h3>
+                            {% else %}
+                            <h3>
+                                ДОРОСЛІ: &nbsp;
+                                <span class="shedule__price">  
+                                    {{ tour.priceAdult }}  
+                                </span> &nbsp; 
+                                {% include 'includes/_price.html' %} 
+                            </h3> 
+                            {% endif %}
+
+                            {% if ifDateAdult %} 
+                            <h3>
+                                (замість &nbsp;
+                                <span class="shedule__crossout"> 
+                                    {{ tour.priceAdult }} 
+                                </span> &nbsp; 
+                                {% include 'includes/_price.html' %} )
+                            </h3> 
+                            {% endif %}
+
                             {% if ifDateAdult %} <div class="shedule__date">до {{ tour.dateBeforeAdult|date:"d.m.Y" }} </div> {% endif %}
                         </div>
-                        <div class="shedule__card">
+
+                        <div class="shedule__card width50">
+                            {% if ifDateChild %}
                             <h3>
                                 ДІТИ: 
-                                <span class="shedule__price"> {% if ifDateChild %} {{ tour.priceChildBefore }} {{ tour.currency }} {% else %} {{ tour.priceChild }} {{ tour.currency }} {% endif %}</span>
+                                <span class="shedule__price">  
+                                    {{ tour.priceChildBefore }} 
+                                </span> 
+                                {% include 'includes/_price.html' %}
                             </h3>
-                            {% if ifDateChild %} <div class="shedule__crossout">{{ tour.priceChild }} {{ tour.currency }}</div> {% endif %}
+                            {% else %}
+                            <h3>
+                                ДІТИ: &nbsp;
+                                <span class="shedule__price">  
+                                    {{ tour.priceChild }}  
+                                </span> &nbsp; 
+                                {% include 'includes/_price.html' %} 
+                            </h3> 
+                            {% endif %}
+                            {% if ifDateChild %} 
+                            <h3>
+                                (замість &nbsp;
+                                <span class="shedule__crossout"> 
+                                    {{ tour.priceChild }} 
+                                </span> &nbsp; 
+                                {% include 'includes/_price.html' %})
+                            </h3> 
+                            {% endif %}
+
                             {% if ifDateChild %} <div class="shedule__date">до {{ tour.dateBeforeChild|date:"d.m.Y" }} </div> {% endif %}
                         </div>
+                    {% else %}
+
+                    <div class="shedule__lower">
+                        <div class="shedule__card width100">
+                            {% if ifDateAdult %}
+                            <h3>
+                                <span class="shedule__price">  
+                                    {{ tour.priceAdultBefore }} 
+                                </span> 
+                                {% include 'includes/_price.html' %}
+                            </h3>
+                            {% else %}
+                            <h3>
+                                <span class="shedule__price">  
+                                    {{ tour.priceAdult }}  
+                                </span> &nbsp; 
+                                {% include 'includes/_price.html' %} 
+                            </h3> 
+                            {% endif %}
+
+                            {% if ifDateAdult %} 
+                            <h3>
+                                (замість &nbsp;
+                                <span class="shedule__crossout"> 
+                                    {{ tour.priceAdult }} 
+                                </span> &nbsp; 
+                                {% include 'includes/_price.html' %} )
+                            </h3> 
+                            {% endif %}
+
+                            {% if ifDateAdult %} <div class="shedule__date">до {{ tour.dateBeforeAdult|date:"d.m.Y" }} </div> {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
                     </div>
                 </div>
             </div>

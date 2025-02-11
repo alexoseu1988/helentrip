@@ -9,9 +9,9 @@ from .forms import TourForm, DayForm, InclusiveForm, NotInclusiveForm, Titlte1Fo
     ReviewTitleForm, ReviewForm, WhyWeForm, ClientForm, UserLoginForm, \
     ImageForGaleryForm, MultiImageForm, FaqForm, FaqTourForm, OneFaqForm, \
     LifehackForm, CardForLifehackForm, DashboardForm, CertificateForm, \
-    DashCertificateForm, MyContactsForm, CodeSearchForm, DescriptionPdfForm
+    DashCertificateForm, MyContactsForm, CodeSearchForm, DescriptionPdfForm, ExtraForm
 from .models import Tour, Day, Inclusive, NotInclusive, Icon, Review, WhyWe, Client, ImageForGalery, ImageForDescription,\
-    Faq, FaqTour, OneFaq, Lifehack, CardForLifehack, Certificate, MyContacts
+    Faq, FaqTour, OneFaq, Lifehack, CardForLifehack, Certificate, MyContacts, Extra, ExtraType
 from django.contrib.auth import login, logout # type: ignore
 from datetime import date
 from dateutil.relativedelta import relativedelta # type: ignore
@@ -21,6 +21,8 @@ from django.core.files.storage import default_storage # type: ignore
 
 
 today = date.today()
+
+settings = MyContacts.objects.all()[0]
 
 # current_site = Site.objects.get_current()
 # domain = current_site.domain
@@ -50,7 +52,7 @@ def user_logout(request):
 ## Титульные страницы
 
 def index(request):
-    pagetitle = 'Heleena_trip'
+    pagetitle = settings.titleIndex
     tours = Tour.objects.filter(isActive=True)[:4]
     why_we = WhyWe.objects.all()
     contacts = MyContacts.objects.all()[0]
@@ -69,7 +71,7 @@ def index(request):
                         телефон замовника: {form.cleaned_data['phone']}"
             send_mail('Новий клієнт', content, 'heleena_trip@ukr.net', ['alexoseu@ukr.net'], fail_silently=False)
             
-            return redirect('thank_you_certificate', certificate.pk)
+            return redirect('thank_you_tour', certificate.pk)
     else:
         form = CertificateForm()
     return render(request, 'trip/index.html', 
@@ -77,7 +79,7 @@ def index(request):
                    'images': images, 'contacts': contacts, 'today': today, 'pagetitle': pagetitle})
     
 def administrator(request):
-    pagetitle = 'Heleena_trip'
+    pagetitle = settings.titleIndex
     tours = Tour.objects.all()
     why_we = WhyWe.objects.all()
     contacts = MyContacts.objects.all()[0]
@@ -165,26 +167,38 @@ def dash_certificates_general(request, completed, certificate_id=None):
     context = {"certificates": certificates, "form": form, "form1": form1, 
                'certificate_forms': certificate_forms, 'pagetitle': pagetitle}
     return render(request, 'trip/dash_certificates.html', context)
+
+def dash_extras(request):
+    return dash_extras_general(request, False)
+
+def dash_extras_completed(request):
+    return dash_extras_general(request, True)
+
+def dash_extras_general(request, completed):
+    pagetitle = 'Робота з додатковими послугами'
+    extras = Extra.objects.filter(completed=completed)
+    context = {"extras": extras, 'pagetitle': pagetitle}
+    return render(request, 'trip/dash_extras.html', context)
     
 def all_reviews(request):
-    pagetitle = 'Відгуки наших клієнтів'
+    pagetitle = settings.titleReviews
     reviews = Review.objects.all()
     return render(request, 'trip/all_reviews.html', {'reviews': reviews, 'pagetitle': pagetitle})
 
 def all_faqs(request):
-    pagetitle = 'Найбільш популярні питання'
+    pagetitle = settings.titleAnswers
     faqs = Faq.objects.all()
     return render(request, 'trip/all_faqs.html', {'faqs': faqs, 'pagetitle': pagetitle})
 
 def galery(request):
-    pagetitle = 'Наші фотозвіти'
+    pagetitle = settings.titleGalery
     tours = Tour.objects.filter(isActive=True)
     view_tours = [i for i in tours if (len(i.galeryImages.all()) > 0)]
     return render(request, 'trip/galery.html', 
                   {'tours': tours, 'view_tours': view_tours, 'pagetitle': pagetitle})
 
 def documents(request):
-    pagetitle = 'Перелік необхідних документів'
+    pagetitle = settings.titleDocuments
     return render(request, 'trip/documents.html', {'pagetitle': pagetitle})
 
 def how_to_apply(request):
@@ -195,21 +209,32 @@ def contacts(request):
     return render(request, 'trip/contacts.html', {'pagetitle': pagetitle})
 
 def about_me(request):
-    pagetitle = 'Про мене'
+    pagetitle = settings.titleAboutMe
     return render(request, 'trip/about_me.html', {'pagetitle': pagetitle})
 
 def extras(request):
-    pagetitle = 'Додаткові послуги'
-    return render(request, 'trip/extras.html', {'pagetitle': pagetitle})
+    pagetitle = settings.titleExtras
+    if request.method == 'POST':
+        form1 = ExtraForm(request.POST)
+        if form1.is_valid():
+            extra = Extra.objects.create(**form1.cleaned_data)
+            type = get_object_or_404(ExtraType, id=1)
+            extra.extraType = type
+            extra.save()
+            return redirect('extras')
+    else:
+        form1 = ExtraForm()
+    return render(request, 'trip/extras.html', {'pagetitle': pagetitle, 'form1': form1,})
 
 def useful(request):
-    pagetitle = 'Корисна інформація'
+    pagetitle = settings.titleUseful
     return render(request, 'trip/useful.html', {'pagetitle': pagetitle})
 
 def lifehacks(request):
-    pagetitle = 'Туристичні лайфхаки'
+    pagetitle = settings.titleLifehacks
     lifehacks = Lifehack.objects.all()
-    return render(request, 'trip/lifehacks.html', {'lifehacks': lifehacks, 'pagetitle': pagetitle})
+    view_lifehacks = [i for i in lifehacks if (len(i.cards.all()) > 0)]
+    return render(request, 'trip/lifehacks.html', {'lifehacks': lifehacks, 'view_lifehacks': view_lifehacks, 'pagetitle': pagetitle})
 
 def lifehack(request, lifehack_id):
     lifehack = get_object_or_404(Lifehack, id=lifehack_id)
@@ -221,13 +246,18 @@ def certificate(request, certificate_id):
     pagetitle = 'Сертифікат'
     return render(request, 'trip/thank_you_certificate.html', {'certificate': certificate, 'pagetitle': pagetitle})
 
+def answers(request):
+    pagetitle = settings.titleAnswers
+    faq = get_object_or_404(Faq, id=7)
+    return render(request, 'trip/answers.html', {'pagetitle': pagetitle, 'faq': faq})
+
 
 ## Страницы с турами
 
 def tour(request, tour_id):
     clients = Client.objects.all()
     tour = get_object_or_404(Tour, id=tour_id)
-    pagetitle = tour.title1
+    pagetitle = str(tour.title1) + " | Авторська подорож | на " + str(tour.dateEnd) + "рік"
     images = ImageForDescription.objects.filter(tour=tour)
     days = Day.objects.filter(tour=tour)
     cards = Inclusive.objects.filter(tour=tour)
@@ -276,7 +306,7 @@ def tour(request, tour_id):
 def edit_tour(request, tour_id):
     clients = Client.objects.all()
     tour = get_object_or_404(Tour, id=tour_id)
-    pagetitle = tour.title1
+    pagetitle = str(tour.title1) + " | редагувати"
     images = ImageForDescription.objects.filter(tour=tour)
     days = Day.objects.filter(tour=tour)
     cards = Inclusive.objects.filter(tour=tour)
@@ -334,12 +364,12 @@ def thank_you_certificate(request, certificate_id):
     
 def tour_galery(request, tour_id):
     tour = get_object_or_404(Tour, id=tour_id)
-    pagetitle = 'Фотозвіт:' + str(tour.title)
+    pagetitle = 'Фотозвіт:' + str(tour.title) + " | галерея"
     return render(request, 'trip/tour_galery.html', {'tour': tour, 'pagetitle': pagetitle})
 
 def all_tours(request):
     tours = Tour.objects.filter(isActive=True)
-    pagetitle = 'Всі поїздки з Heleena_trip'
+    pagetitle = 'Всі подорожі від Heleena_trip | ' + str(settings.titleIndex)
     return render(request, 'trip/all_tours.html', {'tours': tours, 'today': today, 'pagetitle': pagetitle})
 
 def open_pdf(request, tour_id):
@@ -621,7 +651,7 @@ def new_card_for_lifehack(request, lifehack_id):
 
 def change_tour(request, tour_id):
     tour = get_object_or_404(Tour, id=tour_id)
-    pagetitle = 'Редагувати тур:' + tour.title
+    pagetitle = 'Редагувати тур: ' + str(tour.title)
     try:
         old_description_path = tour.descriptionPdf.path
     except:
@@ -727,7 +757,7 @@ def change_why_we(request, card_id):
             return redirect('administrator')
     else:
         form = WhyWeForm(instance=card)
-    return render(request, 'trip/change_obj.html', {'form': form, 'card': card})
+    return render(request, 'trip/change_obj.html', {'form': form, 'card': card, 'pagetitle': pagetitle})
 
 def change_about_me(request):
     pagetitle = 'Редагувати мої дані'
@@ -760,6 +790,18 @@ def change_about_me(request):
     else:
         form = MyContactsForm(instance=about_me)
     return render(request, 'trip/change_about_me.html', {'form': form, 'about_me': about_me, 'pagetitle': pagetitle})
+
+def change_lifehack(request, lifehack_id):
+    pagetitle = 'Редагувати лайфхак'
+    lifehack = get_object_or_404(Lifehack, id=lifehack_id)
+    if request.method == 'POST':
+        form = LifehackForm(request.POST, instance=lifehack)
+        if form.is_valid():
+            form.save()            
+            return redirect('lifehack', lifehack.pk)
+    else:
+        form = LifehackForm(instance=lifehack)
+    return render(request, 'trip/change_obj.html', {'form': form, 'lifehack': lifehack, 'pagetitle': pagetitle})
 
 
 
@@ -1018,6 +1060,15 @@ def complete_certificate(request, certificate_id):
         certificate.completed = True
     certificate.save()
     return redirect('dash_certificates')
+
+def complete_extra(request, extra_id):
+    extra = get_object_or_404(Extra, id=extra_id)
+    if extra.completed:
+        extra.completed = False
+    else:
+        extra.completed = True
+    extra.save()
+    return redirect('dash_extras')
 
 
 ## Удаляем объекты

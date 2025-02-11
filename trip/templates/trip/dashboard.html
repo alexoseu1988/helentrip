@@ -77,9 +77,9 @@
                 </div>
                 <div class="string__blocksmall">
                     <button class="string__update" type="submit"><img src={% static "icons/update.svg" %} alt="Обновить" class="edit__ico"></button>
-                    <div class="string__book"><a href="#"><img src={% static "icons/telegram.svg" %} alt="Телеграм" class="edit__ico"></a></div>
-                    <div class="string__book"><a href="#"><img src={% static "icons/whatsapp.svg" %} alt="Ватсап" class="edit__ico"></a></div>
-                    <div class="string__book"><a href="#"><img src={% static "icons/viber.svg" %} alt="Вайбер" class="edit__ico"></a></div>
+                    <div class="string__book"><a href="tg://msg?to={{ client.phone }}"><img src={% static "icons/telegram.svg" %} alt="Телеграм" class="edit__ico"></a></div>
+                    <div class="string__book"><a href="https://api.whatsapp.com/send?phone={{ client.phone }}"><img src={% static "icons/whatsapp.svg" %} alt="Ватсап" class="edit__ico"></a></div>
+                    <div class="string__book"><a href="viber://chat?number={{ client.phone }}"><img src={% static "icons/viber.svg" %} alt="Вайбер" class="edit__ico"></a></div>
                     {% if not client.deleted %}<div class="string__book">
                         <a href="{% url 'approve_client' client.pk %}">
                             {% if client.approved %}

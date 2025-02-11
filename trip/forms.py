@@ -2,7 +2,7 @@ from django import forms # type: ignore
 from .models import Tour, Day, Inclusive, NotInclusive, Icon, Review, WhyWe,\
                     Client, ImageForGalery, ImageForDescription, Faq, OneFaq,\
                     FaqTour, MyContacts, Lifehack, CardForLifehack, Certificate, \
-                    Communication, Payment
+                    Communication, Payment, Extra, ExtraType
 from ckeditor.widgets import CKEditorWidget # type: ignore
 from django.forms.widgets import NumberInput, TextInput, EmailInput # type: ignore
 from django.contrib.auth.forms import AuthenticationForm # type: ignore
@@ -120,7 +120,9 @@ class MyContactsForm(forms.ModelForm):
         model = MyContacts
         fields = ('phone', 'insta', 'viber', 'whatsapp', 'telegram', 'telegramChannel',
                   'aboutme1', 'aboutme2', 'aboutme3',
-                  'photo1', 'photo2', 'photo3', 'photo4')
+                  'photo1', 'photo2', 'photo3', 'photo4',
+                  'titleIndex', 'titleReviews', 'titleGalery', 'titleDocuments',
+                  'titleAboutMe', 'titleExtras', 'titleUseful', 'titleLifehacks', 'titleAnswers')
         widgets = {
             'aboutme1': CKEditorWidget(),
             'aboutme2': CKEditorWidget(),
@@ -130,7 +132,7 @@ class MyContactsForm(forms.ModelForm):
 class InclusiveForm(forms.ModelForm):
     class Meta:
         model = Inclusive
-        fields = ('title', 'description', 'icon')
+        fields = ('title', 'icon')
         
 class NotInclusiveForm(forms.ModelForm):
     class Meta:
@@ -175,8 +177,8 @@ class ClientForm(forms.ModelForm):
         model = Client
         fields = ('name', 'phone', 'amount', 'children', 'payment', 'communication', 'notes')
         widgets = {
-            'name': TextInput(attrs={'placeholder': 'Петро Петренко'}),
-            'phone': TextInput(attrs={'placeholder': '0681435268'}),
+            'name': TextInput(attrs={'placeholder': "Ім'я та прізвище"}),
+            'phone': TextInput(attrs={'placeholder': 'Ваш номер телефону'}),
             'notes': forms.Textarea(attrs={'rows': 3}),
             'amount': NumberInput(attrs={'step': 1, 'min': 0, 'max': 100}),
             'children': NumberInput(attrs={'step': 1, 'min': 0, 'max': 100}),
@@ -197,6 +199,25 @@ class CertificateForm(forms.ModelForm):
             'phoneFor': TextInput(attrs={'placeholder': '0681435268'}),
             'email': EmailInput(attrs={'placeholder': 'heleena_trip@ukr.net'}),
             'amount': NumberInput(attrs={'step': 1, 'min': 0, 'max': 999999999}),
+        }  
+        
+class ExtraForm(forms.ModelForm):
+    communication = forms.ModelChoiceField(
+        queryset=Communication.objects.all(),
+        empty_label=None,  # Убирает пустой вариант
+        label="Куди Вам дзвонити / писати?"
+    )
+    extraType = forms.ModelChoiceField(
+        queryset=ExtraType.objects.all(),
+        empty_label=None,  # Убирает пустой вариант
+        label="Оберіть бажану послугу"
+    )
+    class Meta:
+        model = Extra
+        fields = ('name', 'phone', 'extraType', 'communication')
+        widgets = {
+            'name': TextInput(attrs={'placeholder': 'Петро Петренко'}),
+            'phone': TextInput(attrs={'placeholder': '0681435268'}),
         }      
         
 class DashboardForm(forms.ModelForm):

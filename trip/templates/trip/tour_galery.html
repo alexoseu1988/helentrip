@@ -16,9 +16,11 @@
                     <ul class="card-list swiper-wrapper">
                         {% for image in tour.galeryImages.all %}
                             <li class="card-item swiper-slide">
-                                <a href="{% url "tour" tour.pk %}" class="card-link">
+                                <div class="card-link">
+                                <!-- <a href="{% url "tour" tour.pk %}" class="card-link"> -->
                                     <img src="{{image.image.url}}" alt="{{tour.title1}}" class="card-image">
-                                </a>
+                                <!-- </a> -->
+                                </div>
                             </li>
                         {% endfor %}
                     </ul>
